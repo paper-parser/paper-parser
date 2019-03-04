@@ -16,7 +16,7 @@ User input is a scientific paper on perovskite synthesis (several formats accept
 4. Data visualization: summarize data in a short, understandable format
 
 ### Use case #2
-User inputs are a few keywords of interest (such as perovskite type, synthesis, and application), which are used to search for relevant papers. The outputs are plots analyzing the relationship between various synthesis parameters and device performance, which are obtained from the library of papers.
+User inputs are a few keywords of interest (such as perovskite type, synthesis, and application), which are used to search for relevant papers. The outputs are plots/visuals analyzing the relationship between various synthesis parameters and device performance, which are obtained from the library of papers.
 (This second use case is the ideal end goal we hope to achieve, but probably too large for the scope of this project.)
 
 #### Components for use case #2
