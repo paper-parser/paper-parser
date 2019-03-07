@@ -79,6 +79,10 @@ In dictionary form (following implementaion):
         }
 
 
+Development Notes:
+
+    03/07/19: Changing implementation of 'ActiveMaterialGraph' to take advantage
+
 """
 from parse import parse_pce, parse_synthesis
 
@@ -87,6 +91,7 @@ class ActiveMaterialGraph(PerformanceMetrics, SynthesisParameters):
             we probably want is a way to build the component
             dictionarie. I we should talk about this.
 
+        Update
 
         Active material extracted from paper and its properties. This
         class serves as a wrapper for the dictionary structure
