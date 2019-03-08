@@ -1,0 +1,1 @@
+!function(n){n.fn.switchPng=function(){var n=this,r=/\.(svg)($|\?)/;if(typeof Modernizr!=="undefined"&&!Modernizr.svg)for(var c=0;c!==n.length;++c)n[c].src=n[c].src.replace(r,".png$2")}}(jQuery);

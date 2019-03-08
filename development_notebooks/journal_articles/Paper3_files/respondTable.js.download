@@ -1,0 +1,1 @@
+!function(n){n.fn.respondTable=function(){return this.each(function(){var t=this,e=n(t).find("tbody td");e.each(function(){n(this).wrapInner('<span class="cell-content"></span>'),n(this).prepend('<span class="cell-heading">'+n(t).find("thead th:nth-child("+(n(this).index()+1)+") ").text()+"</span>")})})}}(jQuery);

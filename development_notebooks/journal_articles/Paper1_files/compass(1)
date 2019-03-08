@@ -1,0 +1,1 @@
+(function(){var p=(location.protocol=='https:'?'https:':'http:');document.write('<script type="text/javascript" src="'+p+'//www.googletagservices.com/tag/js/gpt.js">googletag.pubads().definePassback("/76043757/24867_246270_1", [728, 90]).display();</script>');})();
