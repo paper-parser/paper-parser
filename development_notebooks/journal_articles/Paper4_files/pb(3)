@@ -1,0 +1,1 @@
+(function(){var p=(location.protocol=='https:'?'https:':'http:');document.write('<a href="'+p+'//www.theperspective.com" target=_blank><img border=0 src="//cdn.marphezis.com/banners/perspective_300x250.jpg"></a>');})();
