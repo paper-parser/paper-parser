@@ -40,40 +40,40 @@ Example graph representation of material object:
 In dictionary form (following implementaion):
 
     object = {
-        'material identifier' : 'ABCD',
-            'properties'v : {
-            'Performance metrics' : {
-                'PCE' : {
-                    'value' : (number),
-                    'units' : '%',
-                    },
-                'VOC' : {
-                    'value' : (number),
-                    'units' : 'V',
-                    },
-                'JSC' : {
-                    'value' : (number),
-                    'units' : 'A',
-                    },
-                ect...
-                },
-            'Synthesis' : {
-                'spincoat' : {
-                    'time' : {
+        'Material' : 'ABCD',  # Identifier
+            'Properties' : {
+                'Performance' : {
+                    'PCE' : {
                         'value' : (number),
-                        'units' : 's',
+                        'units' : '%',
                         },
+                    'VOC' : {
+                        'value' : (number),
+                        'units' : 'V',
+                        },
+                    'JSC' : {
+                        'value' : (number),
+                        'units' : 'A',
+                        },
+                    ect...
                     },
-                'annel' : {
-                    'time' : {
-                        'value' : (number),
-                        'units' : 's',
+                'Synthesis' : {
+                    'spincoat' : {
+                        'time' : {
+                            'value' : (number),
+                            'units' : 's',
+                            },
                         },
-                    'temerpature' : {
-                        'value' : (number),
-                        'units' : 'K',
-                        },
-                ect...
+                    'annel' : {
+                        'time' : {
+                            'value' : (number),
+                            'units' : 's',
+                            },
+                        'temerpature' : {
+                            'value' : (number),
+                            'units' : 'K',
+                            },
+                    ect...
                 }
             }
         }
@@ -101,31 +101,55 @@ class ExtractSynthesisPerformance(object):
         #     'performance' : [ list of paragraph strings ],
         #     'synthesis' : [ list of paragraph strings ],
         #     }
+
+        relational_dict = {}
+
         flagged_paragraphs = neels_function(paper)
 
 
         # Christine takes synthesis sentence and extracts parameters
-        (anneal_parameters, spincoat_parameters) = christines_function(
+        synth_steps_and_param_dict = christines_function(
             flagged_paragraphs['synthesis']
             )
 
         # Order steps in synthesis
         ordered_step_list = linnettes_function(synthesis_paragraph)
+        synth_steps_and_param_dict['step_order'] = ordered_step_list
+
+        relational_dict['synthesis'] = synth_steps_and_param_dict
+
 
         # Parse paper for performance metrics
-        pce_info = parse_pce(flagged_paragraphs['performance'])
+        performance_dict = {}
 
-        # ECT for other performance metrics
+        pce_dict = parse_pce(flagged_paragraphs['performance'])
+        performance_dict['PCE'] = pce_dict
 
-        wrapped_info_object = build_realtional_dict(
-            anneal_parameters,
-            spincoat_parameters,
-            ordered_step_list,
-            pce_info,
+        ## ECT for other performance metrics...
+        # voc_dict = {}
+        # voc_dict = parse_voc(flagged_paragraphs['performance'])
+        # performance_dict['VOC'] = voc_dict
+
+        # Then put it all back into main ralational dictionary
+        relational_dict['Performance'] = performance_dict
+
+        # Somehow need to associate properties with chemical name...
+        chemical_name = magically_extact_chemical_name(
+            flagged_paragraphs
             )
-        # ....
 
-    return dictionary_of_relational_results
+        relational_dict = {}
+        relational_dict['Material'] = chemical_name
+
+        self.relational_dict = relational_dict
+
+    def print_ascii_graph(self):
+        """ prints ascii graph inspired by the bash git command
+            'git log --graph'
+            """
+
+        # make_pretty_dict_pretty_in_plain_txt(relational_dict)
+        print('Not ready yet, sorry!')
 
 
 def neels_function(plain_txt):
@@ -140,6 +164,7 @@ def neels_function(plain_txt):
             if this sentence talk about performance metric?
                 this paragraph flagged as performance
         """
+
     pass
 
 
@@ -147,17 +172,46 @@ def christines_function(sentences_or_paragraphs_specific_to_synthesis):
     """ Probably will be imported from another file
 
         import function 'parse_for_anneal' from Christine's file.
-        Should I assume output of type {'material name': 'ABCD', [{Anneal}]}?
-        not sure right now, need to check with Christine.
 
         """
-    flagged_text = sentences_or_paragraphs_specific_to_synthesis
+
+    def parse_for_anneal():
+        """ Should be imported from somewhere...
+
+            Returns: dictionary of format:
+                synthathis_parameters = {
+                    spincoat: [{
+                        spd: value,
+                        spdunits: units,
+                        time: value,
+                        timeunits: units,
+                        temp: value,
+                        tempunits: units
+                        }]
+                    anneal: [{
+                        ...
+                        }]
+                    ...
+                    }
+            """
+        pass
+
+    synth_txt_list = sentences_or_paragraphs_specific_to_synthesis
 
     steps_and_parameters_dict = {}
     # Parse for anneal parameters
-    if parse_for_anneal(flagged_text) != None: # or empty dict or something
-        steps_and_parameters_dict['anneal'] = parse_for_anneal(flagged_text)
-    pass
+    for string in synth_txt_list:
+        parse_output = parse_for_anneal(synth_txt_list)
+        # Add keys to master dictionary if they work,
+        # Parsing through each sentence individually doesn't make sense,
+        # since we are not taking advantage of CDE's ability to relate
+        # across the document.
+        if 'spincoat' in parse_output.keys:
+            steps_and_parameters_dict['spincoat'] = parse_output['spincoat']
+        elif 'anneal' in parse_output.keys:
+            steps_and_parameters_dict['anneal'] = parse_output['anneal']
+
+    return steps_and_parameters_dict
 
 def linnettes_function(sentences_or_paragraphs_specific_to_synthesis):
     """ Probably will be imported from another file """
@@ -185,60 +239,61 @@ class PerformanceMetric(object):
         self.value = value
         self.units = units
 
-
-class ActiveMaterialGraph(PerformanceMetrics, SynthesisParameters):
-    """ NOTE: Not sure that this is worth doing as implemented. What
-            we probably want is a way to build the component
-            dictionarie. I we should talk about this.
-
-
-        Active material extracted from paper and its properties. This
-        class serves as a wrapper for the dictionary structure
-        containing all data and relations extratect from a paper for a
-        single data struction.
-
-        It will allow access to the data and plotting methods.
-
-        Example code:
-
-            amg_1 = ActiveMaterialGraph(
-                PerformanceMetrics=dict_1,
-                SynthesisParameters=dict_2,
-                )
-
-            # print PCE value and units
-            print(amg_1.PCE.value, amg_1.PCE.units)
-
-            # print first step in synthesis
-            print(amg_1.synthesis_steps[0])
-
-        """
-
-    def __init__(self, chemical_identifier, performace_metrics, synthesis_steps):
-        """
-            take inputs and store into dictionary
-
-            Args:
-                performace_metrics: dictionary containing metrics and
-                    associated values. Examaple,
-                        performace_metrics = {
-                            'PCE' : {
-                                'value' : (number),
-                                'units' : '%',
-                                },
-                            'VOC' : {
-                                'value' : (number),
-                                'units' : 'V',
-                                },
-                            'JSC' : {
-                                'value' : (number),
-                                'units' : 'A',
-                                }
-                synthesis_steps: dictionary containing synthesis steps
-                    and relevant parameters.
-            """
+#HJG: Depreciated as of 03/10/19
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# class ActiveMaterialGraph(PerformanceMetrics, SynthesisParameters):
+#     """ NOTE: Not sure that this is worth doing as implemented. What
+#             we probably want is a way to build the component
+#             dictionarie. I we should talk about this.
 
 
-        # unsure how to do this right now, but what I want is an easy way to build the
-        # Unfinished outline ...
+#         Active material extracted from paper and its properties. This
+#         class serves as a wrapper for the dictionary structure
+#         containing all data and relations extratect from a paper for a
+#         single data struction.
+
+#         It will allow access to the data and plotting methods.
+
+#         Example code:
+
+#             amg_1 = ActiveMaterialGraph(
+#                 PerformanceMetrics=dict_1,
+#                 SynthesisParameters=dict_2,
+#                 )
+
+#             # print PCE value and units
+#             print(amg_1.PCE.value, amg_1.PCE.units)
+
+#             # print first step in synthesis
+#             print(amg_1.synthesis_steps[0])
+
+#         """
+
+#     def __init__(self, chemical_identifier, performace_metrics, synthesis_steps):
+#         """
+#             take inputs and store into dictionary
+
+#             Args:
+#                 performace_metrics: dictionary containing metrics and
+#                     associated values. Examaple,
+#                         performace_metrics = {
+#                             'PCE' : {
+#                                 'value' : (number),
+#                                 'units' : '%',
+#                                 },
+#                             'VOC' : {
+#                                 'value' : (number),
+#                                 'units' : 'V',
+#                                 },
+#                             'JSC' : {
+#                                 'value' : (number),
+#                                 'units' : 'A',
+#                                 }
+#                 synthesis_steps: dictionary containing synthesis steps
+#                     and relevant parameters.
+#             """
+
+
+#         # unsure how to do this right now, but what I want is an easy way to build the
+#         # Unfinished outline ...
 
