@@ -112,12 +112,17 @@ class ExtractSynthesisPerformance(object):
         # Order steps in synthesis
         ordered_step_list = linnettes_function(synthesis_paragraph)
 
-        # Parse paper for PCE
+        # Parse paper for performance metrics
         pce_info = parse_pce(flagged_paragraphs['performance'])
 
         # ECT for other performance metrics
 
-        wrapped_info_object = build_realtional_dict
+        wrapped_info_object = build_realtional_dict(
+            anneal_parameters,
+            spincoat_parameters,
+            ordered_step_list,
+            pce_info,
+            )
         # ....
 
     return dictionary_of_relational_results
@@ -139,7 +144,19 @@ def neels_function(plain_txt):
 
 
 def christines_function(sentences_or_paragraphs_specific_to_synthesis):
-    """ Probably will be imported from another file """
+    """ Probably will be imported from another file
+
+        import function 'parse_for_anneal' from Christine's file.
+        Should I assume output of type {'material name': 'ABCD', [{Anneal}]}?
+        not sure right now, need to check with Christine.
+
+        """
+    flagged_text = sentences_or_paragraphs_specific_to_synthesis
+
+    steps_and_parameters_dict = {}
+    # Parse for anneal parameters
+    if parse_for_anneal(flagged_text) != None: # or empty dict or something
+        steps_and_parameters_dict['anneal'] = parse_for_anneal(flagged_text)
     pass
 
 def linnettes_function(sentences_or_paragraphs_specific_to_synthesis):
