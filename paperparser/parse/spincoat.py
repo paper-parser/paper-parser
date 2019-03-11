@@ -1,5 +1,5 @@
 """
-paperparser.parse.synthesis
+paperparser.parse.spincoat
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Built on top of ChemDataExtractor's parse methods.
@@ -7,12 +7,6 @@ Built on top of ChemDataExtractor's parse methods.
 Parses synthetic parameters from given text containing said parameters
 in a disorganized format (e.g. from the text of a paper.) Synthesis parameters
 are related to spin-coating and the involved process(es).
-
-
-DEVELOP NOTES:
-
-HJG 03/10/19:
-    Added missing ')' on line 63
 
 """
 
@@ -59,26 +53,9 @@ class SpinCoat(BaseModel):
 
 # Associate the spin-coating class with a given compound.  May be worth
 # getting rid of for our eventual implementation, not yet sure.
-<<<<<<< HEAD
 Compound.spin_coat = ListType(ModelType(SpinCoat))
-=======
-Compound.spin_coat_steps = ListType(ModelType(SpinCoat))
-
-# Extract units method from ir.py: find units in the text
-def extract_units(tokens, start, result):
-    """Extract units from bracketed after nu"""
-    for e in result:
-        for child in e.iter():
-            if 'rpm' or 'r.p.m.' or 'r.p.m' or 'rcf' or 'r.c.f.' in child.text:
-                return [E('units', 'whatever the unit is')]
-    return []
 
 # Account for extraneous surrounding characters
-delim = R('^[;:,\./]$').hide()
-solvent = (I('GBL') | R('γ-[Bb]utyrolactone' | chemical_name('solvent')))
->>>>>>> master
-
-# Adding GBL to the solvents list
 gbl = (I('GBL') | R('^γ-?[bB]?utyrolactone$'))
 solvent = (gbl | chemical_name)('solvent').add_action(join)
 
@@ -117,4 +94,5 @@ class SpinCoatParser(BaseParser):
 # Add new parsers to CDE native paragraph parsers
 Paragraph.parsers = [SpinCoatParser()]
 
-#
+# The function still is not working and does not correctly parse
+# the test sentence correctly.  Am working on troubleshooting further.
