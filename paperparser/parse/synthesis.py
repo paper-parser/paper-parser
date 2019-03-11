@@ -29,100 +29,69 @@ from chemdataextractor.parse.base import BaseParser
 from chemdataextractor.utils import first
 
 
-# Define a new class for spin-coating parameters
+# Creating SpinStep and SpinCoat class, (eventually) with various properties:
+# speed and speed units (for now), other parameters in the future.
+class SpinStep(BaseModel):
+    """
+    Class containing properties for each spin-coating step.
+    """
+    spd = StringType()
+    spdunits = StringType(contextual=True) # have not yet figured this out
+    #time = StringType()
+    #timeunits = StringType()
+    #temp = StringType()
+    #tempunits = StringType()
+
 class SpinCoat(BaseModel):
     """
-    Class for spin-coating speeds.
+    Class for full list of spin-coating steps for entire spin-coating process.
     """
-    value = StringType() # perhaps rename if time is collected here too
-    units = StringType()
-    # time = StringType()
-    # timeunits = StringType
+    solvent = StringType(contextual=True)
+    steps = ListType(ModelType(SpinStep))
+    #spd = StringType()
+    #spdunits = StringType()
 
 # Associate the spin-coating class with a given compound.  May be worth
 # getting rid of for our eventual implementation, not yet sure.
-Compound.spin_coat_steps = ListType(ModelType(SpinCoat))
+Compound.spin_coat = ListType(ModelType(SpinCoat))
 
-# Extract units method from ir.py: find units in the text
-def extract_units(tokens, start, result):
-    """Extract units from bracketed after nu"""
-    for e in result:
-        for child in e.iter():
-            if 'rpm' or 'r.p.m.' or 'r.p.m' or 'rcf' or 'r.c.f.' in child.text:
-                return [E('units', 'whatever the unit is')]
-    return []
+# Adding GBL to the solvents list
+gbl = (I('GBL') | R('^γ-?[bB]?utyrolactone$'))
+solvent = (gbl | chemical_name)('solvent').add_action(join)
 
-# Account for extraneous surrounding characters
+
+# Variable assignments
+# Deliminator
 delim = R('^[;:,\./]$').hide()
-solvent = (I('GBL') | R('γ-[Bb]utyrolactone' | chemical_name('solvent'))
 
+# Defining formats for spin-coating value and units
+spdunits = Optional(R(u'^r(\.)?p(\.)?m(\.)?$') | R(u'^r(\.)?c(\.)?f(\.)?$') | R(u'^([x×]?)(\s?)?g$'))(u'spdunits').add_action(merge)
+spd = (Optional(W('(')).hide() + R(u'^\d+(,\d+)[0][0]$')(u'spd') + Optional(W(')')).hide())
 
-# Defining
-units = Optional(R(u'^\b?r(\.)?p(\.)?m(\.)?\b?$') | R(u'^r(\.)?c(\.)?f(\.)?$') | R(u'^([x×]?)(\s?)?g$'))(u'units')
-#Optional(W('/')).hide() + W(u'^r\.?p\.?m\.?')
-#R('^(re)?crystalli[sz](ation|ed)$', re.I)
-value = R(u'^\d+(,\d+)?$')(u'value')
-spinspd = (value + units)(u'spinspd')
+step = (spd + ZeroOrMore(spdunits))('step')
+steps = (step + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + step))('steps')
+
+spincoat = (steps + Optional(delim))
 
 class SpinCoatParser(BaseParser):
-    root = spinspd
+    root = spincoat
 
     def interpret(self, result, start, end):
-        compound = Compound(
-            spin_coat_steps=[
-                SpinCoat(
-                    #solvent=first(result.xpath('./solvent/text()')),
-                    value=first(result.xpath('./value/text()')),
-                    units=first(result.xpath('./units/text()'))
-                )
-            ]
+        c = Compound()
+        s = SpinCoat(
+            solvent=first(result.xpath('./solvent/text()'))
         )
-        yield compound
+        spdunits = first(result.xpath('./spdunits/text()'))
+        for step in result.xpath('./steps/step'):
+            spin_step = SpinSpd(
+                spd=first(spd_result.xpath('./spd/text()')),
+                spdunits=spdunits
+            )
+            s.steps.append(spin_step)
+        c.spin_coat.append(s)
+        yield c
 
+# Add new parsers to CDE native paragraph parsers
 Paragraph.parsers = [SpinCoatParser()]
 
-# Similarly, parse spincoat times
-class SpinTime(BaseModel):
-    """
-    Class for spin-coating step times.
-    """
-    value = StringType()
-    units = StringType()
-
-Compound.spin_coat_times = ListType(ModelType(SpinCoat))
-units = combinations of relevant strings
-value = define value formats
-spintime = (value + units)(u'spintime')
-
-class SpinTimeParser(BaseParser):
-    root = spintime
-    def interpret(self, result, start, end):
-        compound = Compound(
-            spin_coat_times=[
-                SpinCoat(
-                    #solvent=first(result.xpath('./solvent/text()')),
-                    value=first(result.xpath('./value/text()')),
-                    units=first(result.xpath('./units/text()'))
-                )
-            ]
-        )
-        yield compound
-
-# Similarly, parse temperatures (e.g. annealing)
-class Anneal(BaseModel):
-    """
-    Class for annealing parameters for perovskite films.
-    """
-    T = StringType()
-    unitsT = StringType()
-    time = StringType()
-    unitst = StringType()
-
-associate with Compound
-define variables
-create anneal master variable
-
-create AnnealParser class
-
-# If time: write parser for actual synthesis.  This is tougherself.
-# May require methods outside of CDE.
+#
