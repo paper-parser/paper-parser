@@ -20,9 +20,11 @@ def syn_order(para):
     synthesis steps found in that sentence.'''
     
     # Database of relevant perovskite synthesis action words 
-    syn_db = ['deposit', 'pyrolysis', 'spin-coat', 'calcine', 'synthesize',
-              'react', 'stir', 'evaporate', 'dissolve', 'prepare', 'coat',
-              'treat', 'drop-cast', 'dry', 'mix', 'anneal']
+    #syn_db = ['deposit', 'pyrolysis', 'spin-coat', 'calcine', 'synthesize',
+    #          'react', 'stir', 'evaporate', 'dissolve', 'prepare', 'coat',
+    #          'treat', 'drop-cast', 'dry', 'mix', 'anneal']
+
+    syn_db = ['spin-coat', 'coat', 'anneal', 'dry']
     
     vb_order = list()
     vb_dict = {}
