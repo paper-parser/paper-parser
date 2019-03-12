@@ -5,7 +5,8 @@ paperparser.parse.spincoat
 Built on top of ChemDataExtractor's parse methods.
 
 Parses spin-coating parameters from given text containing said parameters
-in a disorganized format (e.g. from the text of a paper).
+in a disorganized format (e.g. from the text of a paper).  Returns organized
+format for the parameters.
 
 """
 
@@ -15,17 +16,14 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import logging
 import re
 
 from chemdataextractor import Document
 from chemdataextractor.model import Compound, BaseModel, \
                                     StringType, ListType, ModelType
-from chemdataextractor.doc import Paragraph, Heading
-from chemdataextractor.parse.actions import join, strip_stop
-from chemdataextractor.parse import R, I, W, Optional, merge, \
-                                    ZeroOrMore, OneOrMore
-from chemdataextractor.parse.cem import chemical_name
+from chemdataextractor.doc import Paragraph
+from chemdataextractor.parse.actions import join
+from chemdataextractor.parse import R, I, W, Optional, merge, ZeroOrMore
 from chemdataextractor.parse.base import BaseParser
 from chemdataextractor.utils import first
 
@@ -57,11 +55,6 @@ class SpinCoat(BaseModel):
 # Associate the spin-coating class with a given compound.  May be worth
 # getting rid of for our eventual implementation, not yet sure.
 Compound.spin_coat = ListType(ModelType(SpinCoat))
-
-# Account for extraneous surrounding characters
-gbl = (I('GBL') | R('^γ-?[bB]?utyrolactone$'))
-solvent = (gbl | chemical_name)('solvent').add_action(join)
-
 
 # Variable assignments
 # Deliminators -- hide from tokenization
@@ -121,7 +114,9 @@ Paragraph.parsers = [SpinCoatParser()]
 # Define function to accept sentence and parse using the above parser
 def parse_spincoat(spincoat_str):
     """
-    Given a string as input, converts the string into a ChemDrawExtractor Paragraph and returns a list of spin-coating parameters (speeds and times) found via parsing the string.
+    Given a string as input, converts the string into a ChemDrawExtractor
+    Paragraph and returns a list of spin-coating parameters (speeds and times)
+    found via parsing the string.
     """
     p = Paragraph(spincoat_str)
     return p.records.serialize()
