@@ -4,12 +4,11 @@ import chemdataextractor as cde
 
 from ...extracted_info import PCEParser
 
-class TestPCEParser(BaseParser):
-
+class TestPceParser(BaseParser):
 
     def setUp(self):
         # Add PCE parcer to CDE paragraph parser object
-        cde.doc.text.Paragraph.parsers.append(PCEParser())
+        cde.doc.text.Paragraph.parsers = [PCEParser()]
 
         # Load some test text
         self.easy_test_txt = cde.doc.text.Document(

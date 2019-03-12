@@ -28,7 +28,7 @@ from chemdataextractor.parse.cem import chemical_name
 from chemdataextractor.doc import Paragraph
 
 # From my ipynb ...
-class PCE(BaseModel):
+class Pce(BaseModel):
     value = StringType()
     units = StringType()
 
@@ -64,7 +64,7 @@ pce = (
     )(u'pce')
 
 
-class PCEParser(BaseParser):
+class PceParser(BaseParser):
     root = pce
 
     def interpret(self, result, start, end):
