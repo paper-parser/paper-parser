@@ -18,8 +18,6 @@ from __future__ import unicode_literals
 import logging
 import re
 
-from lxml.builder import E
-
 from chemdataextractor import Document
 from chemdataextractor.model import Compound, BaseModel, \
                                     StringType, ListType, ModelType
@@ -40,10 +38,6 @@ class SpinSpd(BaseModel):
     """
     spdvalue = StringType()
     spdunits = StringType(contextual=True)
-    #time = StringType()
-    #timeunits = StringType()
-    #temp = StringType()
-    #tempunits = StringType()
 
 class SpinTime(BaseModel):
     """
@@ -70,28 +64,33 @@ solvent = (gbl | chemical_name)('solvent').add_action(join)
 
 
 # Variable assignments
-# Deliminators
+# Deliminators -- hide from tokenization
 delim = R('^[;:,\./]$').hide()
 
 # Defining formats for spin-coating value and units
-spdunits = Optional(R(u'^r(\.)?p(\.)?m(\.)?$') | R(u'^r(\.)?c(\.)?f(\.)?$') | R(u'^([x×]?)(\s?)?g$'))('spdunits').add_action(join)
+spdunits = (R(u'^r(\.)?p(\.)?m(\.)?$') | R(u'^r(\.)?c(\.)?f(\.)?$') | R(u'^([x×]?)(\s?)?g$'))('spdunits').add_action(join) + ZeroOrMore(delim)
 spdvalue = Optional(W('(')).hide() + R(u'^\d+(,\d+)[0][0]$')('spdvalue') + Optional(W(')')).hide()
 
 # Defining formats for spin-coating time and time units
 timeprefix = I('for').hide()
-timeunits = Optional(R('^s?(ec|econds)?$') | R('^m?(in|inute)?(s)?$') | R('^h?(ou)?(r)?(s)?$'))('timeunits').add_action(join)
-timevalue = R('^\d{,3}$')('timevalue')
+timeunits = (R('^s?(ec|econds)?$') | R('^m?(in|inute)?(s)?$') | R('^h?(ou)?(r)?(s)?$'))('timeunits').add_action(join) + Optional(delim)
+timevalue = R('^\d{,3}$')('timevalue') + Optional(delim) #<3 digits
 
 # Putting everything together
 spdprefix = I('at').hide()
-spd = (spdvalue + spdunits)('spd')
+spd = (spdvalue)('spd')
 spds = (spd + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + spd))('spds')
-time = (timevalue + timeunits)('time')
+time = (timevalue)('time')
 times = (time + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + time))('times')
 
-spincoat = (Optional(spdprefix).hide() + spds + Optional(delim) + Optional(spdunits) + Optional(delim) + Optional(timeprefix).hide() + Optional(delim) + times + Optional(delim) + Optional(timeunits))('spincoat')
+# Format for string containing spin-coat information
+spincoat = (Optional(spdprefix) + spds + Optional(delim) + Optional(spdunits) + Optional(delim) + Optional(timeprefix) + Optional(delim) + times + Optional(delim) + Optional(timeunits) + Optional(delim))('spincoat')
 
+# New parser class for spin-coat parameter parsing
 class SpinCoatParser(BaseParser):
+    """
+    Parser class for parsing spin-coating parameters.
+    """
     root = spincoat
 
     def interpret(self, result, start, end):
@@ -119,5 +118,10 @@ class SpinCoatParser(BaseParser):
 # Add new parsers to CDE native paragraph parsers
 Paragraph.parsers = [SpinCoatParser()]
 
-# The function still is not working and does not correctly parse
-# the test sentence correctly.  Am working on troubleshooting further.
+# Define function to accept sentence and parse using the above parser
+def parse_spincoat(spincoat_str):
+    """
+    Given a string as input, converts the string into a ChemDrawExtractor Paragraph and returns a list of spin-coating parameters (speeds and times) found via parsing the string.
+    """
+    p = Paragraph(spincoat_str)
+    return p.records.serialize()
