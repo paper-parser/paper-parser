@@ -1,3 +1,11 @@
+<!-- .. image:: https://img.shields.io/badge/license-MIT-green.svg
+   :target: https://github.com/paper-parser/paper-parser/blob/master/LICENSE
+   :alt: MIT License badge
+ -->
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+
+
 # Paper-parser
 
 _WARNING: package is currently in development and not ready for use._
