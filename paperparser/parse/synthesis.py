@@ -8,6 +8,12 @@ Parses synthetic parameters from given text containing said parameters
 in a disorganized format (e.g. from the text of a paper.) Synthesis parameters
 are related to spin-coating and the involved process(es).
 
+
+DEVELOP NOTES:
+
+HJG 03/10/19:
+    Added missing ')' on line 63
+
 """
 
 # Imports
@@ -54,7 +60,7 @@ def extract_units(tokens, start, result):
 
 # Account for extraneous surrounding characters
 delim = R('^[;:,\./]$').hide()
-solvent = (I('GBL') | R('γ-[Bb]utyrolactone' | chemical_name('solvent'))
+solvent = (I('GBL') | R('γ-[Bb]utyrolactone' | chemical_name('solvent')))
 
 
 # Defining
