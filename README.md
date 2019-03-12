@@ -1,10 +1,7 @@
-<!-- .. image:: https://img.shields.io/badge/license-MIT-green.svg
-   :target: https://github.com/paper-parser/paper-parser/blob/master/LICENSE
-   :alt: MIT License badge
- -->
+
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-[![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
+<!-- [![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com) -->
 
 
 
