@@ -84,10 +84,10 @@ Development Notes:
     03/07/19: Changing implementation of 'ActiveMaterialGraph' to take advantage
 
 """
-from parse import parse_pce, parse_synthesis
+from .parse import parse_pce, parse_synthesis
 
 
-class ExtractSynthesisPerformance(object):
+class SynthesisAndPerformanceSummary(object):
     """ Performs data extraction from paper
         """
 
@@ -102,11 +102,29 @@ class ExtractSynthesisPerformance(object):
         #     'synthesis' : [ list of paragraph strings ],
         #     }
 
-        relational_dict = {}
+        self.relational_dict = {}
+        self.paper = paper
 
-        flagged_paragraphs = neels_function(paper)
+
+    def summarize(self):
+
+        self.flagged_paragraphs = neels_function(self.paper)
+
+        self.extract_synthesis_info(self.flagged_paragraphs)
+
+        # Parse paper for performance metrics
+
+        self.extract_performance_metrics()
+
+        # Somehow need to associate properties with chemical name...
+        chemical_name = magically_extact_chemical_name(
+            flagged_paragraphs
+            )
+
+        self.relational_dict['Material'] = chemical_name
 
 
+    def extract_synthesis_info(self, flagged_paragraphs):
         # Christine takes synthesis sentence and extracts parameters
         synth_steps_and_param_dict = christines_function(
             flagged_paragraphs['synthesis']
@@ -116,10 +134,10 @@ class ExtractSynthesisPerformance(object):
         ordered_step_list = linnettes_function(synthesis_paragraph)
         synth_steps_and_param_dict['step_order'] = ordered_step_list
 
-        relational_dict['synthesis'] = synth_steps_and_param_dict
+        self.relational_dict['synthesis'] = synth_steps_and_param_dict
 
 
-        # Parse paper for performance metrics
+    def extract_performance_metrics(self, flagged_paragraphs):
         performance_dict = {}
 
         pce_dict = parse_pce(flagged_paragraphs['performance'])
@@ -131,17 +149,8 @@ class ExtractSynthesisPerformance(object):
         # performance_dict['VOC'] = voc_dict
 
         # Then put it all back into main ralational dictionary
-        relational_dict['Performance'] = performance_dict
+        self.relational_dict['Performance'] = performance_dict
 
-        # Somehow need to associate properties with chemical name...
-        chemical_name = magically_extact_chemical_name(
-            flagged_paragraphs
-            )
-
-        relational_dict = {}
-        relational_dict['Material'] = chemical_name
-
-        self.relational_dict = relational_dict
 
     def print_ascii_graph(self):
         """ prints ascii graph inspired by the bash git command
@@ -150,6 +159,7 @@ class ExtractSynthesisPerformance(object):
 
         # make_pretty_dict_pretty_in_plain_txt(relational_dict)
         print('Not ready yet, sorry!')
+
 
 
 def neels_function(plain_txt):
