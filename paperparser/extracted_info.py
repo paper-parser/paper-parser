@@ -96,11 +96,7 @@ class SynthesisAndPerformanceSummary(object):
 
         # convert paper to text...
 
-        # Flag paragraphs, will be formated as;
-        # {
-        #     'performance' : [ list of paragraph strings ],
-        #     'synthesis' : [ list of paragraph strings ],
-        #     }
+
 
         self.relational_dict = {}
         self.paper = paper
@@ -114,7 +110,7 @@ class SynthesisAndPerformanceSummary(object):
 
         # Parse paper for performance metrics
 
-        self.extract_performance_metrics()
+        self.extract_performance_metrics(self.flagged_paragraphs)
 
         # Somehow need to associate properties with chemical name...
         chemical_name = magically_extact_chemical_name(
@@ -165,6 +161,14 @@ class SynthesisAndPerformanceSummary(object):
 def neels_function(plain_txt):
     """ Probably will be imported from another file
 
+        Flag paragraphs, will be formated as;
+        {
+            'performance' : [ list of paragraph strings ],
+            'synthesis' : [ list of paragraph strings ],
+            }
+
+    Sudo code
+    ~~~~~~~~~
     for paragraph in plain_txt:
         for sentence in paragraph:
             if sentence about synthesis:
