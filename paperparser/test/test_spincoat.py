@@ -1,2 +1,2 @@
 # Import(s)
-import ../parse/spincoat
+from ..parse import spincoat
