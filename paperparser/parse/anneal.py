@@ -58,7 +58,7 @@ Compound.anneal = ListType(ModelType(Anneal)) # currently not working
 delim = R('^[;:,\./]$').hide()
 
 # Defining formats for annealing temperature and units
-tempprefix = I('at').hide()
+tempprefix = (I('at') | I('or')).hide()
 tempunits = (W('°') + R('^[CFK]\.?$'))('tempunits').add_action(merge)
 tempvalue = R('^\d{2,4}?$')('tempvalue').add_action(merge) + Optional(delim)
 
@@ -69,9 +69,9 @@ timevalue = R('^\d{,2}$')('timevalue') + Optional(delim)
 
 # Putting everything together
 temp = (tempvalue)('temp')
-temps = (temp + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + temp))('temps')
+temps = (temp + ZeroOrMore(ZeroOrMore(tempprefix | tempunits | delim | W('and')).hide() + temp))('temps')
 time = (timevalue)('time')
-times = (time + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + time))('times')
+times = (time + ZeroOrMore(ZeroOrMore(timeunits | delim | W('and')).hide() + time))('times')
 
 # Parses anneal parameters from a sentence of this specific format:
 # "at [temp] [tempunits] for [time] [timeunits]"
