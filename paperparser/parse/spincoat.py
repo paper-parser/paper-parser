@@ -72,9 +72,9 @@ timevalue = R('^\d{,3}$')('timevalue') + Optional(delim) #<3 digits
 # Putting everything together
 spdprefix = I('at').hide()
 spd = (spdvalue)('spd')
-spds = (spd + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + spd))('spds')
+spds = (spd + ZeroOrMore(ZeroOrMore(spdunits | delim | W('and')).hide() + spd))('spds')
 time = (timevalue)('time')
-times = (time + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + time))('times')
+times = (time + ZeroOrMore(ZeroOrMore(timeunits | delim | W('and')).hide() + time))('times')
 
 # Format for string containing spin-coat information
 spincoat = (Optional(spdprefix) + spds + Optional(delim) + Optional(spdunits) + Optional(delim) + Optional(timeprefix) + Optional(delim) + times + Optional(delim) + Optional(timeunits) + Optional(delim))('spincoat')
