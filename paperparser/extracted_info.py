@@ -229,7 +229,7 @@ def linnettes_function(sentences_or_paragraphs_specific_to_synthesis):
 
 
 class PerformanceMetric(object):
-    """
+    """ Not currently used.
         """
 
     def __init__(self,
