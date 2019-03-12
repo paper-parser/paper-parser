@@ -35,6 +35,10 @@ Each paper is converted into a relational graph like the example below,
 
 implemented in python as nested dictionaries and lists. 
 
+Each paper goes through the following process 
+
+(_insert flow chart here_)
+
 # Installation
 
 _need to work on this, probably we will just have the user clone the repo and run a python setup script._
