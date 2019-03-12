@@ -21,7 +21,7 @@ import re
 from chemdataextractor import Document
 from chemdataextractor.model import Compound, BaseModel, \
                                     StringType, ListType, ModelType
-from chemdataextractor.doc import Paragraph
+from chemdataextractor.doc import Paragraph, Sentence
 from chemdataextractor.parse.actions import join
 from chemdataextractor.parse import R, I, W, Optional, merge, ZeroOrMore
 from chemdataextractor.parse.base import BaseParser
@@ -102,13 +102,13 @@ class AnnealParser(BaseParser):
         yield c
 
 # Apply annealing parser designed above to a given paragraph
-Paragraph.parsers = [AnnealParser()]
+#Sentence.parsers = [AnnealParser()]
 
 def parse_anneal(anneal_str):
     """
     Given a string as input, converts the string into a ChemDrawExtractor
-    Paragraph and returns a list of annealing parameters (temperatures and
+    Sentence and returns a list of annealing parameters (temperatures and
     times) found via parsing the string.
     """
-    p = Paragraph(anneal_str)
-    return p.records.serialize()
+    Sentence.parsers = [AnnealParser()]
+    return Sentence(anneal_str).records.serialize()
