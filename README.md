@@ -44,7 +44,7 @@ implemented in python as nested dictionaries and lists.
 
 Each paper goes through the following process
 
-![Flowchart for PaperParser workflow](pp_flowchart.svg)
+![Flowchart for PaperParser workflow](doc/pp_flowchart.svg)
 
 # Installation
 
