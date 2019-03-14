@@ -5,11 +5,11 @@
 
 
 
-# Paper-parser
+# Paper-Parser
 
 _WARNING: package is currently in development and not ready for use._
 
-A python package for extracting synthesis and performance metrics from academic articles on perovskite solar cells. The long-term goal of this package is to provide a means to 1) scrape, 2) summarize, and 3) compare the relationships between synthesis procedure and device performance across perovskite literature.
+PaperParser is a python package for extracting synthesis and performance metrics from academic articles on perovskite solar cells. The long-term goal of this package is to provide a means to 1) scrape, 2) summarize, and 3) compare the relationships between synthesis procedure and device performance across perovskite literature.
 
 # Overview
 
@@ -24,7 +24,7 @@ Each paper is converted into a relational graph like the example below,
     | | JSC - # Amps
     | |\
     | | PCE - # percent
-    | ect
+    | etc.
     |
     Synthesis
     |\
@@ -36,15 +36,15 @@ Each paper is converted into a relational graph like the example below,
     |  \
     |   property
     |\
-    | ect. for other steps...
+    | etc. for other steps...
     |
     step ordering: ['step 1', 'step 2', 'step 3']
 
-implemented in python as nested dictionaries and lists. 
+implemented in python as nested dictionaries and lists.
 
-Each paper goes through the following process 
+Each paper goes through the following process
 
-(_insert flow chart here_)
+![Flowchart for PaperParser workflow](doc/pp_flowchart.svg)
 
 # Installation
 

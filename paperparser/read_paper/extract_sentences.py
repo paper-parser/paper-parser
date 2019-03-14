@@ -18,6 +18,8 @@ def extract_all_sentences(doc):
     sentences_record = list()
 
     for i in range(len(doc.elements)):
+        # loop through indicies of document elements in CDE Document
+        # object.
         if type(doc.elements[i]) == chemdataextractor.doc.text.Paragraph:
             sen_index = 0
             for sentence in doc.elements[i]:
@@ -29,9 +31,9 @@ def extract_all_sentences(doc):
 
 
 def extract_sentences_given_tag(doc, para_yes):
-    """extracts sentences from a paper into two lists, given that para_yes 
+    """extracts sentences from a paper into two lists, given that para_yes
     contains a list of document element numbers corresponding to paragraphs
-    manually identified as those containing synthesis information""" 
+    manually identified as those containing synthesis information"""
 
     sen_yes_arr = list()
     sen_no_arr = list()
