@@ -21,7 +21,7 @@ import re
 from chemdataextractor import Document
 from chemdataextractor.model import Compound, BaseModel, \
                                     StringType, ListType, ModelType
-from chemdataextractor.doc import Paragraph
+from chemdataextractor.doc import Paragraph, Sentence
 from chemdataextractor.parse.actions import join
 from chemdataextractor.parse import R, I, W, Optional, merge, ZeroOrMore
 from chemdataextractor.parse.base import BaseParser
@@ -58,7 +58,7 @@ Compound.anneal = ListType(ModelType(Anneal)) # currently not working
 delim = R('^[;:,\./]$').hide()
 
 # Defining formats for annealing temperature and units
-tempprefix = I('at').hide()
+tempprefix = (I('at') | I('or')).hide()
 tempunits = (W('°') + R('^[CFK]\.?$'))('tempunits').add_action(merge)
 tempvalue = R('^\d{2,4}?$')('tempvalue').add_action(merge) + Optional(delim)
 
@@ -69,9 +69,9 @@ timevalue = R('^\d{,2}$')('timevalue') + Optional(delim)
 
 # Putting everything together
 temp = (tempvalue)('temp')
-temps = (temp + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + temp))('temps')
+temps = (temp + ZeroOrMore(ZeroOrMore(tempprefix | tempunits | delim | W('and')).hide() + temp))('temps')
 time = (timevalue)('time')
-times = (time + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + time))('times')
+times = (time + ZeroOrMore(ZeroOrMore(timeunits | delim | W('and')).hide() + time))('times')
 
 # Parses anneal parameters from a sentence of this specific format:
 # "at [temp] [tempunits] for [time] [timeunits]"
@@ -102,13 +102,13 @@ class AnnealParser(BaseParser):
         yield c
 
 # Apply annealing parser designed above to a given paragraph
-Paragraph.parsers = [AnnealParser()]
+#Sentence.parsers = [AnnealParser()]
 
 def parse_anneal(anneal_str):
     """
     Given a string as input, converts the string into a ChemDrawExtractor
-    Paragraph and returns a list of annealing parameters (temperatures and
+    Sentence and returns a list of annealing parameters (temperatures and
     times) found via parsing the string.
     """
-    p = Paragraph(anneal_str)
-    return p.records.serialize()
+    Sentence.parsers = [AnnealParser()]
+    return Sentence(anneal_str).records.serialize()

@@ -21,7 +21,7 @@ import re
 from chemdataextractor import Document
 from chemdataextractor.model import Compound, BaseModel, \
                                     StringType, ListType, ModelType
-from chemdataextractor.doc import Paragraph
+from chemdataextractor.doc import Paragraph, Sentence
 from chemdataextractor.parse.actions import join
 from chemdataextractor.parse import R, I, W, Optional, merge, ZeroOrMore
 from chemdataextractor.parse.base import BaseParser
@@ -72,9 +72,9 @@ timevalue = R('^\d{,3}$')('timevalue') + Optional(delim) #<3 digits
 # Putting everything together
 spdprefix = I('at').hide()
 spd = (spdvalue)('spd')
-spds = (spd + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + spd))('spds')
+spds = (spd + ZeroOrMore(ZeroOrMore(spdunits | delim | W('and')).hide() + spd))('spds')
 time = (timevalue)('time')
-times = (time + ZeroOrMore(ZeroOrMore(delim | W('and')).hide() + time))('times')
+times = (time + ZeroOrMore(ZeroOrMore(timeunits | delim | W('and')).hide() + time))('times')
 
 # Format for string containing spin-coat information
 spincoat = (Optional(spdprefix) + spds + Optional(delim) + Optional(spdunits) + Optional(delim) + Optional(timeprefix) + Optional(delim) + times + Optional(delim) + Optional(timeunits) + Optional(delim))('spincoat')
@@ -109,7 +109,7 @@ class SpinCoatParser(BaseParser):
         yield c
 
 # Add new parsers to CDE native paragraph parsers
-Paragraph.parsers = [SpinCoatParser()]
+#Paragraph.parsers = [SpinCoatParser()]
 
 # Define function to accept sentence and parse using the above parser
 def parse_spincoat(spincoat_str):
@@ -118,5 +118,5 @@ def parse_spincoat(spincoat_str):
     Paragraph and returns a list of spin-coating parameters (speeds and times)
     found via parsing the string.
     """
-    p = Paragraph(spincoat_str)
-    return p.records.serialize()
+    Sentence.parsers = [SpinCoatParser()]
+    return Sentence(spincoat_str).records.serialize()
