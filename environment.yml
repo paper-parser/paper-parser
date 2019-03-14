@@ -1,4 +1,4 @@
-name: py36
+name: christines_py36
 channels:
   - conda-forge
   - chemdataextractor
@@ -159,5 +159,5 @@ dependencies:
   - zlib=1.2.11=h7b6447c_3
   - pip:
     - en-core-web-sm==2.0.0
-prefix: /home/christinehc/anaconda3/envs/py36
+prefix: /home/christinehc/anaconda3/envs/christines_py36
 
