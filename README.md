@@ -5,9 +5,12 @@
 
 <!-- [![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com) -->
 
+![logo](https://raw.githubusercontent.com/theomnipanda/paper-parser/paper-parser/master/images/logo.png)
+
 
 
 # Paper-Parser
+
 
 _WARNING: package is currently in development and not ready for use._
 
