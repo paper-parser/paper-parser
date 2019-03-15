@@ -3,10 +3,7 @@
 
 <!-- [![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com) -->
 
-<img src="https://github.com/paper-parser/paper-parser/blob/master/images/logo.png" width="100" alt="logo">
-
-
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)   [![spaCy](https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg)](https://spacy.io)
+<img src="https://github.com/paper-parser/paper-parser/blob/master/images/logo.png" width="250" alt="logo">    [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)   [![spaCy](https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg)](https://spacy.io)
 # Paper-Parser
 
 
