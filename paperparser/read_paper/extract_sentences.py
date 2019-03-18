@@ -12,7 +12,9 @@ def read_html_paper(paper_path):
 
 
 def extract_all_sentences(doc):
-    """Extracts all sentences in paper as a list of strings"""
+    """Extracts all sentences in paragraphs in paper as a list of strings.
+    Keeps track of paragraph index and sentence index as a list of tuples
+    in output sentences_record."""
 
     sentences_list = list()
     sentences_record = list()
