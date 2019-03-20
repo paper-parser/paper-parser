@@ -54,6 +54,6 @@ Each paper goes through the following process
 PaperParser uses the following open-source packages in its implementation:
 
 * [ChemDataExtractor](https://github.com/mcs07/ChemDataExtractor/)
-* [spaCy] (https://spacy.io)
+* [spaCy](https://spacy.io)
 
 _need to work on this, probably we will just have the user clone the repo and run a python setup script._
