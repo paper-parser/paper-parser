@@ -1,7 +1,17 @@
-# Need to modify
+# what language the build will be configured for
 language: python
+
+# note that all of the versions listed will be tried
 python:
+  - "3.5"
   - "3.6"
+
+# what branches should be evaluated
+branches:
+  only:
+    - master
+
+# list of commands to run to setup the environment
 install:
   - sudo apt-get update
   - if [[ "$TRAVIS_PYTHON_VERSION" == "3.6" ]]; then
@@ -20,5 +30,12 @@ install:
   - source activate cde
   - python setup.py install
   - cde data download
+
+# a list of commands to run before the main script
+#before_script:
+
 script:
   - pytest
+
+  # generate a coverage report to send to back to user
+#after_success:
