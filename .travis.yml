@@ -13,10 +13,8 @@ branches:
 
 # list of commands to run to setup the environment
 install:
-  - pip uninstall -y mkl-fft
   - pip install coverage
   - pip install coveralls
-  - pip install mkl-fft==1.0.10
   - pip install pytest
   - pip install flake8
   - pip install -r requirements.txt
