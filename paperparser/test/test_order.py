@@ -1,7 +1,5 @@
 from chemdataextractor.doc import Paragraph
-import sys
-sys.path.insert(0, '../parse')
-import order
+from ..parse import order
 
 def test_syn_order():
     '''Tests if function syn_order works'''
