@@ -65,6 +65,8 @@ pip install .
 ```
 in the top level directory containing `setup.py`.
 
+(from setup.py example [here](https://python-packaging.readthedocs.io/en/latest/minimal.html)
+
 
 ## Dependencies
 
