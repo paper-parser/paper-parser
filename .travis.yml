@@ -15,19 +15,17 @@ branches:
 install:
   - pip install coverage
   - pip install coveralls
+  - pip install pytest
   - pip install flake8
   - pip install -r requirements.txt
-  - pip install -U scikit-learn
-  - pip install -U spacy
-  - pip install chemdataextractor
   - cde data download
 
 # a list of commands to run before the main script
 before_script:
-  - "flake8 paper-parser"
+  - "flake8 paperparser"
 
 script:
   - coverage run -m unittest discover
 
-  # generate a coverage report to send to back to user
+# generate a coverage report to send to back to user
 #after_success:
