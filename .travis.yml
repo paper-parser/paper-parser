@@ -21,6 +21,7 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
+  - conda install -c anaconda pytest
   - conda install scikit-learn
   - conda install -c chemdataextractor chemdataextractor
   - conda install -c conda-forge spacy
