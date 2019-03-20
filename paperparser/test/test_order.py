@@ -1,4 +1,6 @@
 from chemdataextractor.doc import Paragraph
+import sys
+sys.path.insert(0, '../parse')
 import order
 
 def test_syn_order():

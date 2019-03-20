@@ -1,0 +1,1 @@
+(function(){var p=(location.protocol=='https:'?'https:':'http:');document.write('<script>var _cpb={w:728,h:90,t:24867,f:0.10,to:3500,bids:[{bidder:"rubicon",params:{accountId:"18034",siteId:"229662",zoneId:"1137036",floor:"0.10"}}]};</script><script src="' + p + '//cdn.topsrvimp.com/cmps/pw.min.js"></script>');})();
