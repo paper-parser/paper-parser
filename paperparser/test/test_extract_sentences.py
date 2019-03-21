@@ -1,12 +1,14 @@
 import chemdataextractor
 from ..read_paper import extract_sentences
+import os
 
 
 def test_read_html_paper():
     """Test function for opening a html file and storing it as a Document"""
     
-    doc = extract_sentences.read_html_paper(
-        '../../examples/journal_articles/Paper0.html')
+    doc = extract_sentences.read_html_paper(os.path.join
+    	(os.path.dirname(__file__), 
+        '../../examples/journal_articles/Paper0.html'))
     
     assert type(doc) == chemdataextractor.doc.document.Document,\
     'output is not a chemdataextractor Document type'
@@ -17,8 +19,9 @@ def test_read_html_paper():
 def test_extract_all_sentences():
     """Test function for extracting sentences from a Document"""
     
-    doc = extract_sentences.read_html_paper(
-        '../../examples/journal_articles/Paper0.html')
+    doc = extract_sentences.read_html_paper(os.path.join
+    	(os.path.dirname(__file__), 
+        '../../examples/journal_articles/Paper0.html'))
     sentences_list, sentences_record =\
         extract_sentences.extract_all_sentences(doc)
     
@@ -46,8 +49,9 @@ def test_extract_sentences_given_tag():
     """Test function for extracting sentences from a Document into two separate lists,
     based on given paragraph(s) """
     
-    doc = extract_sentences.read_html_paper(
-        '../../examples/journal_articles/Paper0.html')
+    doc = extract_sentences.read_html_paper(os.path.join
+    	(os.path.dirname(__file__), 
+        '../../examples/journal_articles/Paper0.html'))
     sen_yes_arr, sen_no_arr =\
         extract_sentences.extract_sentences_given_tag(doc, [109])
     
