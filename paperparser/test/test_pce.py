@@ -2,6 +2,7 @@
 
 import chemdataextractor as cde
 
+from chemdataextractor.parse.base import BaseParser
 from paperparser.parse.pce import PceParser
 
 class TestPceParser(BaseParser):
