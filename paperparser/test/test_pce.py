@@ -2,7 +2,7 @@
 
 import chemdataextractor as cde
 
-from ..extracted_info import PCEParser
+from ..extracted_info import PceParser
 
 class TestPceParser(BaseParser):
 
@@ -60,5 +60,3 @@ class TestPceParser(BaseParser):
         # find_in_nat_list
         # nat_sec_last_dicts = self.second_to_last_para_w_1_pce_html[find_pce_list_hard]
         # for pce_dict in pce_dicts:
-
-
