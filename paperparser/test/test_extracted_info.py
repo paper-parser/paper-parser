@@ -24,7 +24,7 @@ class TestSynthesisAndPerformanceSummary(object):
         assert True == False, "Test not yet constructed. GET TO WORK!"
 
 
-def test_neels_function(plain_txt):
+def test_neels_function():
     """ Probably will be imported from another file
 
     for paragraph in plain_txt:
@@ -40,7 +40,7 @@ def test_neels_function(plain_txt):
     assert True == False, "Test not yet constructed. GET TO WORK!"
 
 
-def test_christines_function(sentences_or_paragraphs_specific_to_synthesis):
+def test_christines_function():
     """ Probably will be imported from another file
 
         import function 'parse_for_anneal' from Christine's file.
@@ -49,7 +49,7 @@ def test_christines_function(sentences_or_paragraphs_specific_to_synthesis):
 
     assert True == False, "Test not yet constructed. GET TO WORK!"
 
-def test_linnettes_function(sentences_or_paragraphs_specific_to_synthesis):
+def test_linnettes_function():
     """ Probably will be imported from another file """
 
     assert True == False, "Test not yet constructed. GET TO WORK!"
