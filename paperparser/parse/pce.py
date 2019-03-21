@@ -32,21 +32,37 @@ class Pce(BaseModel):
     value = StringType()
     units = StringType()
 
-Compound.pce = ListType(ModelType(Pce))
+Compound.pce_pattern = ListType(ModelType(Pce))
 
-prefix = (I(u'PCEs') | I(u'pce') | I(u'power') + I(u'conversion') + I(u'efficiency')).hide()
-common_text = R('\D').hide()
+abbrv_prefix = (
+    I(u'PCE') | I(u'PCEs') | I(u'pce') ).hide()
+words_pref = (
+    I(u'power') + I(u'conversion') + I(u'efficiency')
+    ).hide()
+hyphanated_pref =(
+    I(u'power-conversion') + I(u'efficiency')
+    ).hide()
+prefix = abbrv_prefix | words_pref | hyphanated_pref
+
+common_text = R('(\w+)?\D(\D+)+(\w+)?').hide()
 units = (W(u'%') | I(u'percent'))(u'units')
 # value = R(u'^\d+(\.\d+)?$')(u'value')
 value = R(u'\d+(\.\d+)?')(u'value')
-pce = (prefix + Optional(common_text)+Optional(common_text) + value + units)(u'pce')
+
+pce_first= (
+    prefix + ZeroOrMore(common_text) + value + units
+    )(u'pce')
+pce_second = (
+    value + units + prefix)(u'pce')
+
+pce_pattern = pce_first | pce_second
 
 class PceParser(BaseParser):
-    root = pce
+    root = pce_pattern
 
     def interpret(self, result, start, end):
         compound = Compound(
-            pce=[
+            pce_pattern=[
                 Pce(
                     value=first(result.xpath('./value/text()')),
                     units=first(result.xpath('./units/text()'))
