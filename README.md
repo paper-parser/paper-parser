@@ -51,6 +51,23 @@ Each paper goes through the following process
 
 # Installation
 
+Clone the repo to your local machine and then install `paperparser` by
+
+1. First creating a copy on the conda environment `environment.yml` by running the following command in your terminal 
+    ```bash
+    conda env create -f environment.yml
+    ```
+
+
+2. Install the package by running 
+    ```bash
+    pip install .
+    ```
+    in the top level directory containing `setup.py`.
+
+(from setup.py example [here](https://python-packaging.readthedocs.io/en/latest/minimal.html))
+
+
 ## Dependencies
 
 PaperParser uses the following open-source packages in its implementation:

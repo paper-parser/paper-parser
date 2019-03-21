@@ -2,7 +2,7 @@
 
 import chemdataextractor as cde
 
-from ...extracted_info import PCEParser
+from ..extracted_info import PCEParser
 
 class TestPceParser(BaseParser):
 

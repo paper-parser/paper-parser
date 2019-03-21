@@ -19,9 +19,9 @@ from __future__ import unicode_literals
 from chemdataextractor import parse
 
 
- # Function Imports
- from .spincoat import parse_spincoat
- from .anneal import parse_anneal
+# Function Imports
+from .spincoat import parse_spincoat
+from .anneal import parse_anneal
 
 
 # Parser imports
