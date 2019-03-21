@@ -9,6 +9,7 @@ list.
 
 from chemdataextractor.doc import Paragraph
 import nltk
+nltk.download('punkt')
 
 def syn_order(para):
     '''Finds relevant perovskite synthesis steps (using known database) in 
