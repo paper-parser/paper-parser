@@ -75,4 +75,7 @@ PaperParser uses the following open-source packages in its implementation:
 * [ChemDataExtractor](https://github.com/mcs07/ChemDataExtractor/)
 * [spaCy](https://spacy.io)
 
-_need to work on this, probably we will just have the user clone the repo and run a python setup script._
+# User Guide
+
+An example of each tool that makes up `paperparser` is contained within the jupyter notebook `examples/example_notebook.ipynb`. This notebook should not require installation of `paperparser` if run in the original directory structure. 
+
