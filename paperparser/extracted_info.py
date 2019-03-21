@@ -84,7 +84,7 @@ Development Notes:
     03/07/19: Changing implementation of 'ActiveMaterialGraph' to take advantage
 
 """
-from .parse import pce, synthesis
+from .parse import pce, spincoat, anneal
 
 
 class SynthesisAndPerformanceSummary(object):
@@ -310,4 +310,3 @@ class PerformanceMetric(object):
 
 #         # unsure how to do this right now, but what I want is an easy way to build the
 #         # Unfinished outline ...
-
