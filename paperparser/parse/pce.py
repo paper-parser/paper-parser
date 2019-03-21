@@ -18,7 +18,7 @@ information from conclusive text at the end of a scientific paper.
 import logging
 import re
 
-from chemdataextractor.model import Compound, UvvisSpectrum, UvvisPeak, BaseModel
+from chemdataextractor.model import Compound, UvvisSpectrum, UvvisPeak, BaseModel, StringType, ListType, ModelType
 from chemdataextractor.parse.common import hyphen
 from chemdataextractor.parse.base import BaseParser
 from chemdataextractor.utils import first
