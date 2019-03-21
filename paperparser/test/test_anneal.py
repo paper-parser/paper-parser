@@ -1,17 +1,17 @@
 # Import(s)
 from chemdataextractor.doc import Sentence
-from paperparser.parse.spincoat import SpinCoatParser, spincoat, parse_spincoat
+from paperparser.parse.anneal import AnnealParser, annealing, parse_anneal
 
 
 # Test variables and outputs
-test_s = 'The resulting solution was coated onto the mp-TiO2/bl-TiO2/FTO substrate by a consecutive two-step spin-coating process at 1,000 and 5,000 r.p.m for 10 and 20 s, respectively.'
-test_s_output = parse_spincoat(test_s)
+test_s = "The substrate was then dried on a hot plate at 100 °C or 150 °C for 10 min."
+test_s_output = parse_anneal(test_s)
 
 
 # Test functions
-def test_parse_spincoat():
+def test_parse_anneal():
     """
-    Test function for spincoat.parse_spincoat
+    Test function for anneal.parse_anneal
     """
     assert isinstance(test_s, str), 'Incorrect input type: string required'
     assert isinstance(test_s_output, list), \
