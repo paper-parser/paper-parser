@@ -72,15 +72,15 @@ def train_predictor(X_train, Y_train):
                      ('classifier', classifier)])
 
     # Fit model using training data
-    pipe.fit(X_train, Y_train)
+    a=pipe.fit([X_train[i] for i in range(len(X_train))], [Y_train[i] for i in range(len(Y_train))])
 
-    return pipe
+    return a
 
 
 def classify_sentences(model, X_sentences):
     """Uses an input predictor model to classify a list of sentences,
     and returns classified sentences as two separate lists"""
-    pred_data = model.predict(X_sentences) 
+    pred_data = model.predict([X_sentences[i] for i in range(len(X_sentences))]) 
     predicted_output = pred_data.astype(np.float)
     synthesis_sentence = []
     not_synthesis_sentence = []
