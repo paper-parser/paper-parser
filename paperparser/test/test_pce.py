@@ -8,7 +8,7 @@ class TestPceParser(BaseParser):
 
     def setUp(self):
         # Add PCE parcer to CDE paragraph parser object
-        cde.doc.text.Paragraph.parsers = [PCEParser()]
+        cde.doc.text.Paragraph.parsers = [PceParser()]
 
         # Load some test text
         self.easy_test_txt = cde.doc.text.Document(
