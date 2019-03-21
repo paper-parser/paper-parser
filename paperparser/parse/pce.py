@@ -34,70 +34,26 @@ class Pce(BaseModel):
 
 Compound.pce = ListType(ModelType(Pce))
 
-metric = (
-    I(u'PCEs')
-    |
-    I(u'pce')
-    |
-    (
-        I(u'power')
-        +
-        I(u'conversion')
-        +
-        I(u'efficiency')
-        )
-    ).hide()
-common_text = R('\D+').hide()
+prefix = (I(u'PCEs') | I(u'pce') | I(u'power') + I(u'conversion') + I(u'efficiency')).hide()
+common_text = R('\D').hide()
 units = (W(u'%') | I(u'percent'))(u'units')
+# value = R(u'^\d+(\.\d+)?$')(u'value')
 value = R(u'\d+(\.\d+)?')(u'value')
-# val_uni_one_str = R(u'\d+(\.\d+)?%')(u'value')
-
-value_units = (value + units) #| val_uni_one_str
-
-pce = (
-    # (
-    metric
-    +
-    Optional(common_text)
-    +
-    Optional(common_text)
-    +
-    Optional(common_text)
-    +
-    value
-    +
-    units
-        # )
-    # |
-    # (
-    #     value_units
-    #     # +
-    #     # Optional(common_text)
-    #     +
-    #     metric
-    #     )
-    )(u'pce')
-
+pce = (prefix + Optional(common_text)+Optional(common_text) + value + units)(u'pce')
 
 class PceParser(BaseParser):
     root = pce
 
     def interpret(self, result, start, end):
-        # print(result)
-        try:
-            compound = Compound(
-                pce=[
-                        Pce(
-                            value=first(result.xpath('./value/text()')),
-                            units=first(result.xpath('./units/text()'))
-                        )
-                    ]
+        compound = Compound(
+            pce=[
+                Pce(
+                    value=first(result.xpath('./value/text()')),
+                    units=first(result.xpath('./units/text()'))
                 )
-            yield compound
-
-        except AttributeError:
-            print('AttributeError, aborting parse')
-            yield Compound()
+            ]
+        )
+        yield compound
 
 
 
