@@ -84,7 +84,7 @@ Development Notes:
     03/07/19: Changing implementation of 'ActiveMaterialGraph' to take advantage
 
 """
-from .parse import parse_pce, parse_synthesis
+from .parse import pce, synthesis
 
 
 class SynthesisAndPerformanceSummary(object):

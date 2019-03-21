@@ -47,7 +47,7 @@ def test_christines_function(sentences_or_paragraphs_specific_to_synthesis):
 
         """
 
-    assert True == False, "Test not yet constructed. GET TO WORK!" return steps_and_parameters_dict
+    assert True == False, "Test not yet constructed. GET TO WORK!"
 
 def test_linnettes_function(sentences_or_paragraphs_specific_to_synthesis):
     """ Probably will be imported from another file """
