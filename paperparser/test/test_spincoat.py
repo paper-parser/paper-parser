@@ -11,9 +11,11 @@ def test_parse_spincoat():
     Test function for spincoat.parse_spincoat
     """
     assert isinstance(test_s, str), 'Incorrect input type: string required'
-    assert isinstance(test_s_output, list), 'Error: incorrect output type \
-                                            (list expected)'
+    assert isinstance(test_s_output, list), (
+        'Error: incorrect output type (list expected)'
+        )
     assert test_s_output, 'Error: no parameters detected (parsing error)'
     try:
-        assert isinstance(test_s_output[0], dict), 'Error: output must be \
-                                                    list of dictionaries'
+        assert isinstance(test_s_output[0], dict), (
+            'Error: output must be list of dictionaries'
+            )
