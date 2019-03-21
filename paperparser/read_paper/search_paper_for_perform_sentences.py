@@ -1,8 +1,17 @@
 """ Contains base functions for proper funtioning of the MASTER
     function of this script:
-        list_perform_sents
-    which takes an html file and by default returns the sentences with
-    quantitative information on device PCE.
+
+        list_perform_sents: which takes an html file and by default
+            returns the sentences with quantitative information on
+            device PCE.
+
+            Args:
+                paper_html_file: string including path to paper html
+                    file.
+                metric: By default the string 'PCE', but can be 'VOC'
+                    or 'JSC'. Controlls case insensitive search for
+                    metric as well as corresponding numeric information
+                    .
     """
 
 import sys
@@ -15,6 +24,7 @@ def sentence_list_from_paper(paper_html_file):
     """ Extracts list of sentences from an html file using
         ChemDataExtractor's html reader.
         """
+
     paper = extract_sentences.read_html_paper('journal_articles/Paper0.html')
     X_sentences, sentences_record = extract_sentences.extract_all_sentences(paper)
 
@@ -22,7 +32,10 @@ def sentence_list_from_paper(paper_html_file):
 
 
 def quantified_performance_sentence_search(sentence_list, metric='PCE'):
-    """ Finds sentences in list that contain quantitative information about PCE (power conversion efficiency)"""
+    """ Finds sentences in list that contain quantitative information
+        about PCE (power conversion efficiency)
+        """
+
     return_sents = []
 
     if metric == 'PCE':
@@ -62,6 +75,7 @@ def list_perform_sents(paper_html_file, metric='PCE'):
         containing quantified infromation on specific performance
         metrics (PCE by default).
         """
+
     all_sentences = sentence_list_from_paper(paper_html_file)
     sentences_w_perf_metric_info = quantified_performance_sentence_search(
         sentence_list=all_sentences,
