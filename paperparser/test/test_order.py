@@ -16,6 +16,6 @@ def test_syn_order():
     
     assert vb_order[0][0] == 'dry', 'First action identified is incorrect'
     assert vb_order[0][1] == 0, 'Sentence number where first action is identified is incorrect'
-    assert vb_order[3][0] == 'anneal', 'Fails to identify capitalized word'
+    assert vb_order[2][0] == 'anneal', 'Fails to identify capitalized word'
     assert ['anneal', 'spin-coat'] in vb_dict.values(), \
     'Fails to store all steps found in vb_dict output'
