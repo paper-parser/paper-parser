@@ -2,9 +2,11 @@ import chemdataextractor
 from chemdataextractor import Document
 from chemdataextractor.reader import HtmlReader
 import numpy as np
+import os
 
 def read_html_paper(paper_path):
     """Opens a HTML paper and stores it as a chemdataextractor Document"""
+   
     f = open(paper_path, 'rb')
     doc = Document.from_file(f, readers=[HtmlReader()])
 
