@@ -17,9 +17,8 @@ def test_parse_spincoat():
         )
     assert test_s_output, 'Error: no parameters detected (parsing error)'
     try:
-        assert isinstance(test_s_output[0], dict),
-            'Error: output must be list of dictionaries'
-            )
+        assert isinstance(test_s_output[0], dict), \
+        'Error: output must be list of dictionaries')
     except IndexError:
         raise Exception('Error: output is not a list, or is an empty list')
     except TypeError:
