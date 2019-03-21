@@ -32,7 +32,7 @@ class Pce(BaseModel):
     value = StringType()
     units = StringType()
 
-Compound.pce = ListType(ModelType(PCE))
+Compound.pce = ListType(ModelType(Pce))
 
 prefix = (
     I(u'PCEs')
@@ -70,7 +70,7 @@ class PceParser(BaseParser):
     def interpret(self, result, start, end):
         compound = Compound(
             pce=[
-                PCE(
+                Pce(
                     value=first(result.xpath('./value/text()')),
                     units=first(result.xpath('./units/text()'))
                 )
