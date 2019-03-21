@@ -1,7 +1,14 @@
+""" Contains base functions for proper funtioning of the MASTER
+    function of this script:
+        list_perform_sents
+    which takes an html file and by default returns the sentences with
+    quantitative information on device PCE.
+    """
+
 import sys
 import re
 
-from .read_paper import extract_sentences
+import extract_sentences
 
 
 def sentence_list_from_paper(paper_html_file):
