@@ -18,7 +18,8 @@ _WARNING: package is currently in development and not ready for use._
 
 Each paper is converted into a relational graph like the example below,
 
-    Material (some chemical name)
+<p align="center"><img src="https://github.com/paper-parser/paper-parser/blob/master/doc/images/output_graph.png" width="500" alt="graph"></p>
+<!--     Material (some chemical name)
     |\
     | Performance metrics
     | |\
@@ -41,7 +42,7 @@ Each paper is converted into a relational graph like the example below,
     |\
     | etc. for other steps...
     |
-    step ordering: ['step 1', 'step 2', 'step 3']
+    step ordering: ['step 1', 'step 2', 'step 3'] -->
 
 implemented in python as nested dictionaries and lists.
 
