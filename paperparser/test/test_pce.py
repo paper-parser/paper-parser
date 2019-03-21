@@ -2,13 +2,13 @@
 
 import chemdataextractor as cde
 
-from ..extracted_info import PCEParser
+from paperparser.parse.pce import PceParser
 
 class TestPceParser(BaseParser):
 
     def setUp(self):
         # Add PCE parcer to CDE paragraph parser object
-        cde.doc.text.Paragraph.parsers = [PCEParser()]
+        cde.doc.text.Paragraph.parsers = [PceParser()]
 
         # Load some test text
         self.easy_test_txt = cde.doc.text.Document(
@@ -60,5 +60,3 @@ class TestPceParser(BaseParser):
         # find_in_nat_list
         # nat_sec_last_dicts = self.second_to_last_para_w_1_pce_html[find_pce_list_hard]
         # for pce_dict in pce_dicts:
-
-

@@ -1,10 +1,10 @@
 # Import(s)
-from ..parse import spincoat # not sure how to write this correctly
 from chemdataextractor.doc import Sentence
+from paperparser.parse.spincoat import SpinCoatParser, spincoat, parse_spincoat
 
 # Test variables and outputs
 test_s = 'The resulting solution was coated onto the mp-TiO2/bl-TiO2/FTO substrate by a consecutive two-step spin-coating process at 1,000 and 5,000 r.p.m for 10 and 20 s, respectively.'
-test_s_output = spincoat.parse_spincoat(test_s)
+test_s_output = parse_spincoat(test_s)
 
 # Test functions
 def test_parse_spincoat():
