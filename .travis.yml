@@ -21,7 +21,8 @@ install:
   - cde data download
 
 # a list of commands to run before the main script
-#before_script:
+before_script:
+  - export PYTHONPATH=$PYTHONPATH:$(pwd)
 #  - "flake8 paperparser"
 
 script:
