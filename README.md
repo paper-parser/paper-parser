@@ -18,7 +18,9 @@ _WARNING: package is currently in development and not ready for use._
 
 ## How It Works
 
+<p align="center">
 ![Flowchart for PaperParser workflow](doc/images/pp_flowchart.svg)
+</p>
 
 ## Output
 
