@@ -62,7 +62,7 @@ delim = R('^[;:,\./]$').hide()
 
 # Defining formats for spin-coating value and units
 spdunits = (R(u'^r(\.)?p(\.)?m(\.)?$') | R(u'^r(\.)?c(\.)?f(\.)?$') | R(u'^([x×]?)(\s?)?g$'))('spdunits').add_action(join) + ZeroOrMore(delim)
-spdvalue = Optional(W('(')).hide() + R(u'^\d+(,\d+)[0][0]$')('spdvalue') + Optional(W(')')).hide()
+spdvalue = Optional(W('(')).hide() + R(u'^\d+(,\d+)?[0][0]$')('spdvalue') + Optional(W(')')).hide()
 
 # Defining formats for spin-coating time and time units
 timeprefix = I('for').hide()
