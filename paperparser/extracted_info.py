@@ -101,11 +101,14 @@ from sklearn.externals import joblib
 
 
 class SynthesisAndPerformanceSummary(object):
-    """ Performs data extraction from paper
-        """
+    """
+    Performs data extraction from paper
+    """
 
     def __init__(self, paper_html_path):
-        """ Run components to extract information from paper """
+        """
+        Run components to extract information from paper
+        """
 
         # convert paper to text...
 
@@ -129,7 +132,7 @@ class SynthesisAndPerformanceSummary(object):
         self.parsed_pce = self.parse_for_pce(self.pce_sentences)
 
         # Somehow need to associate properties with chemical name...
-        self.chem_names_associate = self.magically_extact_chemicals(
+        self.chem_names_associate = self.magically_extract_chemicals(
             self.paper
             )
 
@@ -225,7 +228,7 @@ class SynthesisAndPerformanceSummary(object):
         print('Not ready yet, sorry!')
 
 
-        self.chem_names_associate = self.magically_extact_chemicals(
+        self.chem_names_associate = self.magically_extract_chemicals(
             self.paper
             )
 
