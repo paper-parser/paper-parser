@@ -1,5 +1,5 @@
 import os
-from paperparser.read_paper import sentence_classifier
+from read_paper import sentence_classifier
 import sklearn
 from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib

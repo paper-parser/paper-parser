@@ -22,11 +22,9 @@ github repo: .../mcs07/ChemDataExtractor/
     """
 # Imports
 from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
 
 
+# Function imports
 from .extract_sentences import read_html_paper, extract_all_sentences,\
                                 extract_sentences_given_tag
 from .search_paper_for_perform_sentences import sentence_list_from_paper,\
