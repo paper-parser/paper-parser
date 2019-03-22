@@ -51,6 +51,10 @@ def test_train_predictor():
 
 def test_classify_sentences():
     """Test function for classifying sentences"""
+    
+    X_test1= ('abc','cde','efg') #needs a list passed is tuple
+    X_test=[
+        'A dense blocking layer of TiO2 (bl-TiO2, ∼70 nm in thickness) was deposited onto a F-doped SnO2 (FTO, Pilkington, TEC8) substrate          by spray pyrolysis, using a 20 mM titanium diisopropoxide bis(acetylacetonate) solution (Aldrich) at 450 °C to prevent direct              contact between the FTO and the hole-conducting layer.','A 200–300-nm-thick mesoporous TiO2 (particle size: about 50 nm,                  crystalline phase: anatase) film was spin-coated onto the bl-TiO2/FTO substrate using home-made pastes14 and calcining at 500 °C          for 1 h in air to remove organic components.','CH3NH3I (MAI) and CH3NH3Br (MABr) were first synthesized by reacting 27.86 ml              CH3NH2 (40% in methanol, Junsei Chemical) and 30 ml HI (57 wt% in water, Aldrich) or 44 ml HBr (48 wt% in water, Aldrich) in a            250 ml round-bottom flask at 0 °C for 4 h with stirring, respectively.']
 
     #import pre-trained model for classfying sentence
     # try/except added due to travis's inability to handle pkl import
@@ -64,6 +68,4 @@ def test_classify_sentences():
         pass
     except FileNotFoundError:
         pass
-    X_test1= ('abc','cde','efg') #needs a list passed is tuple
-    X_test=[
-        'A dense blocking layer of TiO2 (bl-TiO2, ∼70 nm in thickness) was deposited onto a F-doped SnO2 (FTO, Pilkington, TEC8) substrate          by spray pyrolysis, using a 20 mM titanium diisopropoxide bis(acetylacetonate) solution (Aldrich) at 450 °C to prevent direct              contact between the FTO and the hole-conducting layer.','A 200–300-nm-thick mesoporous TiO2 (particle size: about 50 nm,                  crystalline phase: anatase) film was spin-coated onto the bl-TiO2/FTO substrate using home-made pastes14 and calcining at 500 °C          for 1 h in air to remove organic components.','CH3NH3I (MAI) and CH3NH3Br (MABr) were first synthesized by reacting 27.86 ml              CH3NH2 (40% in methanol, Junsei Chemical) and 30 ml HI (57 wt% in water, Aldrich) or 44 ml HBr (48 wt% in water, Aldrich) in a            250 ml round-bottom flask at 0 °C for 4 h with stirring, respectively.']
+    
