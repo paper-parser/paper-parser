@@ -1,5 +1,5 @@
 import chemdataextractor
-from ..read_paper import extract_sentences
+from paperparser.read_paper import extract_sentences
 import os
 
 
