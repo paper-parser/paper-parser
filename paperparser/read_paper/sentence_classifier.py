@@ -11,6 +11,7 @@ Predict if sentences should be tagged 0 or 1 based on trained model.
 import extract_sentences
 import numpy as np
 import pandas as pd
+import sklearn
 from sklearn.base import TransformerMixin 
 from sklearn.feature_extraction.stop_words \
 import ENGLISH_STOP_WORDS as stopwords
@@ -63,24 +64,29 @@ def spacy_tokenizer(sentence):
 def train_predictor(X_train, Y_train):
     """Create vectorizer object to generate feature vectors,
     we will use custom spacy’s tokenizer"""
+    assert type(X_train)==type(Y_train)==list
+    assert len(X_train)== len(Y_train)
     vectorizer = CountVectorizer(tokenizer = spacy_tokenizer, 
                                 ngram_range=(1,1))
     classifier = LinearSVC()
-
+    
     # Create the  pipeline to clean, tokenize, vectorize, and classify 
     pipe = Pipeline([("cleaner", predictors()),
                      ('vectorizer', vectorizer),
                      ('classifier', classifier)])
-
+    
     # Fit model using training data
     a=pipe.fit([X_train[i] for i in range(len(X_train))], [Y_train[i] for i in range(len(Y_train))])
-
     return a
 
 
 def classify_sentences(model, X_sentences):
     """Uses an input predictor model to classify a list of sentences,
     and returns classified sentences as two separate lists"""
+    
+    assert type(model)== sklearn.pipeline.Pipeline
+    assert type(X_sentences)==list
+    
     pred_data = model.predict([X_sentences[i] for i in range(len(X_sentences))]) 
     predicted_output = pred_data.astype(np.float)
     synthesis_sentence = []
