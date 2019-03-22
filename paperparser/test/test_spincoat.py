@@ -1,3 +1,12 @@
+"""
+paperparser.test.test_spincoat
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Test function for the spin-coating parameters parser
+(paperparser.parse.spincoat).
+
+Future work: implement a test class.
+"""
+
 # Import(s)
 from chemdataextractor.doc import Sentence
 from paperparser.parse.spincoat import SpinCoatParser, spincoat, parse_spincoat

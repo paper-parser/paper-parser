@@ -229,7 +229,7 @@ class SynthesisAndPerformanceSummary(object):
             self.paper
             )
 
-    def magically_extact_chemicals(self, paper):
+    def magically_extract_chemicals(self, paper):
         """
             """
         print('You wish bud!')

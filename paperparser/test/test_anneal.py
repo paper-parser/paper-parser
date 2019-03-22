@@ -1,3 +1,11 @@
+"""
+paperparser.test.test_anneal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Test function for the annealing parameters parser (paperparser.parse.anneal).
+
+Future work: implement a test class.
+"""
+
 # Import(s)
 from chemdataextractor.doc import Sentence
 from paperparser.parse.anneal import AnnealParser, annealing, parse_anneal
