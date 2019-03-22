@@ -9,7 +9,7 @@ Predict if sentences should be tagged 0 or 1 based on trained model.
 
 # Imports
 
-from paperparser.read_paper import extract_sentences
+import extract_sentences
 import numpy as np
 #import pandas as pd
 import sklearn
@@ -105,4 +105,3 @@ def classify_sentences(model, X_sentences):
 
 
     return predicted_output, synthesis_sentence, not_synthesis_sentence
-
