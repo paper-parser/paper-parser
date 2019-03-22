@@ -8,21 +8,21 @@ Predict if sentences should be tagged 0 or 1 based on trained model.
 """
 
 # Imports
-import extract_sentences
+from paperparser.read_paper import extract_sentences
 import numpy as np
 import pandas as pd
 import sklearn
-from sklearn.base import TransformerMixin 
+from sklearn.base import TransformerMixin
 from sklearn.feature_extraction.stop_words \
 import ENGLISH_STOP_WORDS as stopwords
-from sklearn.feature_extraction.text import CountVectorizer 
-from sklearn.metrics import accuracy_score 
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import accuracy_score
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 from spacy.lang.en import English
 import string
 
-# Custom transformer using spaCy 
+# Custom transformer using spaCy
 class predictors(TransformerMixin):
     """
     Class for predictors for model to be built on
@@ -40,7 +40,7 @@ class predictors(TransformerMixin):
         return {}
 
 
-# Basic utility function to clean the text 
+# Basic utility function to clean the text
 def clean_text(text):
     """Cleans text; makes all text lower case"""
     return text.strip().lower()
@@ -53,11 +53,11 @@ def spacy_tokenizer(sentence):
     parser = English()
     assert type(sentence) == str
     tokens = parser(sentence)
-    tokens = [tok.lemma_.lower().strip() 
+    tokens = [tok.lemma_.lower().strip()
         if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
-    tokens = [tok for tok in tokens 
-        if (tok not in stopwords and tok not in punctuations)]     
-    
+    tokens = [tok for tok in tokens
+        if (tok not in stopwords and tok not in punctuations)]
+
     return tokens
 
 
@@ -66,15 +66,15 @@ def train_predictor(X_train, Y_train):
     we will use custom spacy’s tokenizer"""
     assert type(X_train)==type(Y_train)==list
     assert len(X_train)== len(Y_train)
-    vectorizer = CountVectorizer(tokenizer = spacy_tokenizer, 
+    vectorizer = CountVectorizer(tokenizer = spacy_tokenizer,
                                 ngram_range=(1,1))
     classifier = LinearSVC()
-    
-    # Create the  pipeline to clean, tokenize, vectorize, and classify 
+
+    # Create the  pipeline to clean, tokenize, vectorize, and classify
     pipe = Pipeline([("cleaner", predictors()),
                      ('vectorizer', vectorizer),
                      ('classifier', classifier)])
-    
+
     # Fit model using training data
     a=pipe.fit([X_train[i] for i in range(len(X_train))], [Y_train[i] for i in range(len(Y_train))])
     return a
@@ -83,11 +83,11 @@ def train_predictor(X_train, Y_train):
 def classify_sentences(model, X_sentences):
     """Uses an input predictor model to classify a list of sentences,
     and returns classified sentences as two separate lists"""
-    
+
     assert type(model)== sklearn.pipeline.Pipeline
     assert type(X_sentences)==list
-    
-    pred_data = model.predict([X_sentences[i] for i in range(len(X_sentences))]) 
+
+    pred_data = model.predict([X_sentences[i] for i in range(len(X_sentences))])
     predicted_output = pred_data.astype(np.float)
     synthesis_sentence = []
     not_synthesis_sentence = []
@@ -97,5 +97,5 @@ def classify_sentences(model, X_sentences):
             synthesis_sentence.append(X_sentences[i])
         else:
             not_synthesis_sentence.append(X_sentences[i])
-            
+
     return predicted_output, synthesis_sentence, not_synthesis_sentence
