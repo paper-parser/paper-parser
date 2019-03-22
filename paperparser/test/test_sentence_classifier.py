@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from paperparser.read_paper import sentence_classifier
 import sklearn
 from sklearn.pipeline import Pipeline
