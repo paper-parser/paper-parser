@@ -17,7 +17,7 @@
 import sys
 import re
 
-import extract_sentences
+from paperparser.read_paper import extract_sentences
 
 
 def sentence_list_from_paper(paper_html_file):

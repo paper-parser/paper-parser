@@ -85,8 +85,8 @@ Development Notes:
 
 """
 
-from parse import pce, anneal, order, spincoat
-from read_paper import (
+from paperparser.parse import pce, anneal, order, spincoat
+from paperparser.read_paper import (
     extract_sentences, sentence_classifier, search_paper_for_perform_sentences
     )
 # from .parse import pce, synthesis
