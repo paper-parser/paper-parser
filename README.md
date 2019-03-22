@@ -8,10 +8,6 @@
 
 <p align="center"><img src="https://github.com/paper-parser/paper-parser/blob/master/doc/images/logo.png" width="300" alt="PaperParser"></p>
 
-
-_WARNING: package is currently in development and not ready for use._
-
-
 **PaperParser** is a python package for extracting synthesis and performance metrics from academic articles on perovskite solar cells. The long-term goal of this package is to provide a means to (1) scrape, (2) summarize, and (3) compare the relationships between synthesis procedure and device performance across perovskite literature.
 
 # Overview
