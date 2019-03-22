@@ -5,6 +5,16 @@ paperparser.parse
 Module containing tools to parse synthesis parameters and PCE (power
 conversion efficiency) from perovskite paper text.
 
+    parse
+    |\
+    | anneal
+    |\
+    | order
+    |\
+    | pce
+     \
+      spincoat
+
 Built on top of ChemDataExtractor version 1.3.0, copyright 2017 Matt
 Swain and contributors.
 github repo: .../mcs07/ChemDataExtractor/
