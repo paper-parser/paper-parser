@@ -7,8 +7,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib
 import numpy
 
-#with open(os.path.join(os.path.dirname(__file__), '../syn_sen_model.pkl'), 'rb') as syn_pickle:
-#    syn_sen_model = joblib.load(syn_pickle) #imported pre-trained model for classfying sentence
 
 def test_spacy_tokenizer():
     """ Test function for tokenizing a sentence"""
@@ -54,6 +52,9 @@ def test_train_predictor():
 
 def test_classify_sentences():
     """Test function for classifying sentences"""
+
+    #import pre-trained model for classfying sentence
+	syn_sen_model = joblib.load(os.path.join(os.path.dirname(__file__), '../syn_sen_model.pkl'))
 
     X_test1= ('abc','cde','efg') #needs a list passed is tuple
     X_test=[
