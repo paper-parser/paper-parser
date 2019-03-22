@@ -1,8 +1,5 @@
 import os
-from paperparser.read_paper.sentence_classifier import clean_text, \
-                                                        spacy_tokenizer,\
-                                                        train_predictor,\
-                                                        classify_sentences
+from paperparser.read_paper import sentence_classifier
 import sklearn
 from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib
@@ -19,13 +16,13 @@ def test_spacy_tokenizer():
         'By Jove , my quick study of lexicography won a prize .',
         'This is a short sentence .'] #sentences has to be str and list is passed so will raise a type error
     try:
-        tokenized_sentences = spacy_tokenizer(sentences)
+        tokenized_sentences = sentence_classifier.spacy_tokenizer(sentences)
     except (AssertionError):
         pass
     else:
         raise Exception ("Exception not handled by Asserts")
 
-    tokenized_sentences_1 = spacy_tokenizer(sentences[0])
+    tokenized_sentences_1 = sentence_classifier.spacy_tokenizer(sentences[0])
     assert type(tokenized_sentences_1) == list,\
     """output is ['quick', 'brown', 'fox', 'jump', 'lazy', 'dog'] is to check whether stop words and punctuation is working"""
     assert len(tokenized_sentences_1) == 6
@@ -39,7 +36,7 @@ def test_train_predictor():
         'The device substrates were placed in a substrate holder above the sources with the TiO2-coated FTO side facing down towards the           sources.','1','2']
     Y_train= [1,0,0,1,1]
     try:
-        a = train_predictor(X_train,Y_train) #will raise an assertion error for length of list
+        a = sentence_classifier.train_predictor(X_train,Y_train) #will raise an assertion error for length of list
     except (AssertionError):
         pass
     else:
@@ -49,7 +46,7 @@ def test_train_predictor():
         'We placed approximately 500\u2009mg of CH3NH3I and 100\u2009mg of PbCl2 into separate crucibles.',
          'The device substrates were placed in a substrate holder above the sources with the TiO2-coated FTO side facing down towards                the sources.','Once the pressure in the chamber was pumped down to below 10−5\u2009mbar, the two sources were heated                      slightly above their desired deposition temperatures for approximately 5\u2009min (that is, CH3NH3I was heated to about 120                \u2009°C and PbCl2 was heated to about 325\u2009°C) to remove volatile impurities before depositing the materials onto the                substrate.','The substrate holder was rotated to ensure uniform coating throughout deposition, because the right-hand                      source predominantly coats the right-hand side of the substrate and similarly for the left.','The substrate holder was                    water-cooled to approximately 21\u2009°C, though precise measurement of the substrate temperature during deposition was not                performed.']
     Y_train1=['1.0','1.0','1.0','0.0','1.0']
-    a1= train_predictor(X_train1,Y_train1)
+    a1= sentence_classifier.train_predictor(X_train1,Y_train1)
     assert type(a1)==sklearn.pipeline.Pipeline   # output prediction assertion
     return
 
@@ -62,12 +59,12 @@ def test_classify_sentences():
 
 
     try:
-        a = classify_sentences(syn_sen_model,X_test1) #will raise an assertion error
+        a = sentence_classifier.classify_sentences(syn_sen_model,X_test1) #will raise an assertion error
     except (AssertionError):
         pass
     else:
         raise Exception ("Exception not handled by Asserts")
 
-    pred_data, synthesis_sentences, not_synthesis_sentences = classify_sentences(syn_sen_model,X_test)
+    pred_data, synthesis_sentences, not_synthesis_sentences = sentence_classifier.classify_sentences(syn_sen_model,X_test)
     assert type(pred_data)== numpy.ndarray #output check
     assert type(synthesis_sentences) == type(not_synthesis_sentences) == list #output check
