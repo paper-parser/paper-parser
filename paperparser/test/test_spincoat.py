@@ -29,7 +29,7 @@ def test_parse_spincoat():
     try:
         level0 = test_s_output[0]
         level1 = test_s_output[0].get('spin_coat')[0]
-        level2a = test_output[0].get('spin_coat')[0].get('spds')[0]
+        level2a = test_s_output[0].get('spin_coat')[0].get('spds')[0]
         level2b = test_s_output[0].get('spin_coat')[0].get('times')[0]
         assert isinstance(level0, dict), \
             'Error: output must be list of dictionaries'

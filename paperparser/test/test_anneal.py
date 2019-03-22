@@ -28,12 +28,12 @@ def test_parse_anneal():
     try:
         level0 = test_s_output[0]
         level1 = test_s_output[0].get('anneal')[0]
-        level2a = test_output[0].get('anneal')[0].get('temps')[0]
+        level2a = test_s_output[0].get('anneal')[0].get('temps')[0]
         level2b = test_s_output[0].get('anneal')[0].get('times')[0]
         assert isinstance(level0, dict), \
             'Error: output must be list of dictionaries'
-        assert 'spin_coat' in level0, \
-            'Error: spincoat parameter either not found, or parsed incorrectly'
+        assert 'anneal' in level0, \
+            'Error: anneal parameter either not found, or parsed incorrectly'
         assert 'temps' and 'times' in level1, \
             'Error: Anneal parameters not detected'
         assert 'tempvalue' and 'tempunits' in level2a, \
