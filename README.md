@@ -83,7 +83,7 @@ The simplest way to run the example notebooks is to clone the git repo to your l
     ```bash
     pip install ipykernel 
     pip install pandas
-    ``` -->
+    ``` 
 
 (from setup.py example [here](https://python-packaging.readthedocs.io/en/latest/minimal.html))
 
