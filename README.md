@@ -84,11 +84,7 @@ The simplest way to run the example notebooks is to clone the git repo to your l
     cde data download
     ```
 
-7. For use of the example notebooks, you will also need jupyter notebooks and pandas, which can be installed using
-    ```bash
-    pip install ipykernel
-    pip install pandas
-    ```
+Now you're ready to use PaperParser!  If you're lost, be sure to check out the **example notebook** in `./examples/example_notebook.ipynb`.  Happy parsing!
 <!--(from setup.py example [here](https://python-packaging.readthedocs.io/en/latest/minimal.html))-->
 
 ## Dependencies
