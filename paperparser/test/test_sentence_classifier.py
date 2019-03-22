@@ -1,13 +1,11 @@
 import os
-import requests
 from paperparser.read_paper import sentence_classifier
 import sklearn
 from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib
 import numpy
 
-req = requests.get('https://github.com/paper-parser/paper-parser/blob/master/paperparser/syn_sen_model.pkl?raw=true')
-with open('syn_sen_model.pkl', 'rb') as syn_pickle:
+with open(os.path.join(os.path.dirname(__file__), '../syn_sen_model.pkl'), 'rb') as syn_pickle:
     syn_sen_model = joblib.load(syn_pickle) #imported pre-trained model for classfying sentence
 
 def test_spacy_tokenizer():
