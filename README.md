@@ -56,12 +56,17 @@ The simplest way to run the example notebooks is to clone the git repo to your l
 
 1. First creating a new conda environment by running the following command in your terminal 
     ```bash
-    conda create -n myenv python=3.6
+    conda create -n your_new_env python=3.6
     ```
     Since paperparser was designed in python 3.6. 
     <!-- This turns out to be important, because for some reason the verson of pip that comes with the conda installation of python 3.6 does not work with our `setup.py` and `requirements.txt` files. -->
 
-2. Next, pip install following `setup.py` by running 
+2. Activate your new, clean conda environment
+    ```bash
+    conda activate your_new_env
+    ```
+
+3. pip install in your new conda environment by running 
     ```bash
     pip install .
     ```
