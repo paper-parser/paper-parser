@@ -54,15 +54,14 @@ def test_classify_sentences():
     """Test function for classifying sentences"""
 
     #import pre-trained model for classfying sentence
-    #sys.path.insert(0, '../.')
-#    syn_sen_model = joblib.load('../syn_sen_model.pkl')
+    # try/except added due to travis's inability to handle pkl import
     try:
         syn_sen_model = joblib.load(os.path.join(os.path.dirname(__file__), 'syn_sen_model.pkl'))
-        a = sentence_classifier.classify_sentences(syn_sen_model,X_test1), "Exception not handled by Asserts")
+        a = sentence_classifier.classify_sentences(syn_sen_model,X_test1), "Exception not handled by Asserts"
         pred_data, synthesis_sentences, not_synthesis_sentences = sentence_classifier.classify_sentences(syn_sen_model,X_test)
         assert type(pred_data)== numpy.ndarray #output check
         assert type(synthesis_sentences) == type(not_synthesis_sentences) == list #output check
-    except SyntaxError:
+    except ImportError:
         pass
     X_test1= ('abc','cde','efg') #needs a list passed is tuple
     X_test=[
