@@ -50,6 +50,7 @@ def spacy_tokenizer(sentence):
     these can also be replaced by word vectors"""
     punctuations = string.punctuation
     parser = English()
+    assert type(sentence) == str
     tokens = parser(sentence)
     tokens = [tok.lemma_.lower().strip() 
         if tok.lemma_ != "-PRON-" else tok.lower_ for tok in tokens]
