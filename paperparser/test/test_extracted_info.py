@@ -1,55 +1,64 @@
-# import stuff
+"""Not finished"""
 
 class TestSynthesisAndPerformanceSummary(object):
+    """
+        """
 
-    def setUP(self):
-        # Load test paper
-        # self.test_paper = load html file
-        pass
+    def setUp(self):
+        """ Run components to extract information from paper """
+
+        # Load paper
 
 
     def test_summarize(self):
-        assert True# == False, "Test not yet constructed. GET TO WORK!"
+
+        assert True == False, "Write the test dumbo"
 
 
-    def test_extract_synthesis_info(self):
-        assert True# == False, "Test not yet constructed. GET TO WORK!"
+    def test_read_paper(self):
+
+        assert True == False, "Write the test dumbo"
+
+    def test_find_synth_sentences(self):
+
+        assert True == False, "Write the test dumbo"
 
 
-    def extract_performance_metrics(self):
-        assert True# == False, "Test not yet constructed. GET TO WORK!"
+    def test_classify_sents(self):
+
+        assert True == False, "Write the test dumbo"
+
+
+    def test_parse_for_spinco(self):
+
+        assert True == False, "Write the test dumbo"
+
+
+    def test_parse_for_anneal(self):
+
+        assert True == False, "Write the test dumbo"
+
+
+
+    def test_find_pce_sentences(self):
+
+        assert True == False, "Write the test dumbo"
+
+
+
+    def test_parse_for_pce(self):
+
+        assert True == False, "Write the test dumbo"
 
 
     def test_print_ascii_graph(self):
-        assert True# == False, "Test not yet constructed. GET TO WORK!"
+        """ prints ascii graph inspired by the bash git command
+            'git log --graph'
+            """
+        assert True == False, "Write the test dumbo"
 
 
-def test_neels_function():
-    """ Probably will be imported from another file
-
-    for paragraph in plain_txt:
-        for sentence in paragraph:
-            if sentence about synthesis:
-                this paragraph should be flagged as synthesis
-            else: pass
-
-            if this sentence talk about performance metric?
-                this paragraph flagged as performance
+    def test_magically_extact_chemicals(self):
         """
-
-    assert True# == False, "Test not yet constructed. GET TO WORK!"
-
-
-def test_christines_function():
-    """ Probably will be imported from another file
-
-        import function 'parse_for_anneal' from Christine's file.
-
-        """
-
-    assert True# == False, "Test not yet constructed. GET TO WORK!"
-
-def test_linnettes_function():
-    """ Probably will be imported from another file """
-
-    assert True# == False, "Test not yet constructed. GET TO WORK!"
+            """
+        assert True == False, "Write the test dumbo"
