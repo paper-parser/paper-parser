@@ -1,6 +1,6 @@
 """
-paperparser.parse
-~~~~~~~~~~~~~~~~~
+paperparser.read_paper
+~~~~~~~~~~~~~~~~~~~~~~
 
     read_paper
     |\
@@ -20,3 +20,15 @@ Swain and contributors.
 github repo: .../mcs07/ChemDataExtractor/
 
     """
+# Imports
+from __future__ import absolute_import
+
+
+# Function imports
+from .extract_sentences import read_html_paper, extract_all_sentences,\
+                                extract_sentences_given_tag
+from .search_paper_for_perform_sentences import sentence_list_from_paper,\
+                                quantified_performance_sentence_search,\
+                                list_perform_sents
+from .sentence_classifier import clean_text, spacy_tokenizer, train_predictor,\
+                                classify_sentences

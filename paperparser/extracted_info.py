@@ -89,7 +89,6 @@ from parse import pce, anneal, order, spincoat
 from read_paper import (
     extract_sentences, sentence_classifier, search_paper_for_perform_sentences
     )
-from parse import anneal, order, spincoat, pce
 # from .parse import pce, synthesis
 # from .read_paper import (
 #     extract_sentences, sentence_classifier, search_paper_for_perform_sentences
@@ -97,7 +96,7 @@ from parse import anneal, order, spincoat, pce
 # from .parse import anneal, order, spincoat, pce
 
 import sys
-import pandas as pd
+#import pandas as pd
 from sklearn.externals import joblib
 
 
@@ -234,23 +233,3 @@ class SynthesisAndPerformanceSummary(object):
         """
             """
         print('You wish bud!')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
