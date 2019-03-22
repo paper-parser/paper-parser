@@ -54,7 +54,7 @@ def test_classify_sentences():
     """Test function for classifying sentences"""
 
     #import pre-trained model for classfying sentence
-    syn_sen_model = joblib.load(os.path.join(os.path.dirname(__file__), '../syn_sen_model.pkl'))
+#    syn_sen_model = joblib.load(os.path.join(os.path.dirname(__file__), '../syn_sen_model.pkl'))
 
     X_test1= ('abc','cde','efg') #needs a list passed is tuple
     X_test=[
