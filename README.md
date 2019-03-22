@@ -99,3 +99,5 @@ PaperParser uses the following open-source packages in its implementation:
 
 An example of each tool that makes up `paperparser` is contained within the jupyter notebook `examples/example_notebook.ipynb`. This notebook should not require installation of `paperparser` if run in the original directory structure. 
 
+Another example notebook titles `examples/example_extracted_info.ipynb` contains direction on the use of the high-level wrapper to (almost) all of the tools discussed in `examples/example_notebook.ipynb`. This object implements the output graph displayed at the top of this README, abiet in a much more confusing format because we have not yet figured out how to associate each parsed value with a specific chemical name. As of now each value returned from parsing is simply left in order, so that future development to the module `paperparser.extracted_info` could use associations within the respective parsed sentences (as well as between sentences) and eventually return relational data trees like the dream dispayed above. 
+
