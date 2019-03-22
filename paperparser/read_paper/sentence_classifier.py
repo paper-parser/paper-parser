@@ -10,7 +10,7 @@ Predict if sentences should be tagged 0 or 1 based on trained model.
 # Imports
 from paperparser.read_paper import extract_sentences
 import numpy as np
-import pandas as pd
+#import pandas as pd
 import sklearn
 from sklearn.base import TransformerMixin
 from sklearn.feature_extraction.stop_words \
