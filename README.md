@@ -24,7 +24,7 @@ _WARNING: package is currently in development and not ready for use._
 
 The result is a relational graph like the example below,
 
-<p align="center"><img src="https://github.com/paper-parser/paper-parser/blob/master/doc/images/output_graph.png" width="750" alt="graph"></p>
+<p align="center"><img src="https://github.com/paper-parser/paper-parser/blob/master/doc/images/output_graph.png" width="600" alt="graph"></p>
 <!--     Material (some chemical name)
     |\
     | Performance metrics
@@ -63,24 +63,29 @@ The simplest way to run the example notebooks is to clone the git repo to your l
     ```
     (Note: PaperParser was designed in Python 3.6, but also works with 3.5.)
     <!-- This turns out to be important, because for some reason the verson of pip that comes with the conda installation of python 3.6 does not work with our `setup.py` and `requirements.txt` files. -->
+
 2. Activate your new, clean conda environment.
     ```bash
     conda activate your_new_env
     ```
+
 3. (Optional) For users of Git for Windows/Git Bash: run the following command.
     ```bash
     conda install -c conda-forge dawg
     ```
     Note that Linux, Mac, and WSL (Windows Subsystem for Linux) users can skip this step.
+
 4. Navigate to the top-level directory containing `setup.py` and pip install by running
     ```bash
     pip install .
     ```
     This will automatically install the dependencies required to run the package and the provided example notebooks. _Make sure you are in the correct environment before running `pip install`!_
+
 5. Download [ChemDataExtractor](http://chemdataextractor.org/docs/install)'s Data files. This step is important-- PaperParser will not run without this step.
     ```bash
     cde data download
     ```
+
 6. For use of the example notebooks, you will also need jupyter notebooks and pandas, which can be installed using
     ```bash
     pip install ipykernel
