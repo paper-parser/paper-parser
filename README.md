@@ -18,7 +18,7 @@ _WARNING: package is currently in development and not ready for use._
 
 ## How It Works
 
-<p align="center"><img src="https://github.com/paper-parser/paper-parser/raw/master/doc/images/pp_flowchart.svg" alt="Flowchart for PaperParser workflow"></p>
+<p align="center"><img src="https://github.com/paper-parser/paper-parser/blob/master/doc/images/pp_flowchart.svg" alt="Flowchart for PaperParser workflow"></p>
 
 ## Output
 
