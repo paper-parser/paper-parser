@@ -112,12 +112,12 @@ class SynthesisAndPerformanceSummary(object):
 
         self.paper_html_path = paper_html_path
 
-        self.relational_dict = self.summarize(self.paper_html_path)
+        self.relational_dict = self.summarize()
 
 
     def summarize(self):
 
-        self.paper = read_paper(self.paper_html_path)
+        self.paper = self.read_paper(self.paper_html_path)
         self.all_sentences, self.sent_recor = self.find_synth_sentences(
             self.paper
             )
@@ -134,11 +134,13 @@ class SynthesisAndPerformanceSummary(object):
             self.paper
             )
 
-        self.relational_dict = {
+        relational_dict = {
             'Parsed_Spincoat' : self.parsed_spinco,
             'Parsed_Anneal' : self.parsed_anneal,
             'Parsed_PCE' : self.parsed_pce,
             }
+
+        return relational_dict
 
 
     def read_paper(self, paper_html_path):
@@ -171,7 +173,7 @@ class SynthesisAndPerformanceSummary(object):
             not_synthesis_sentences,
             ) = sentence_classifier.classify_sentences(
                 syn_sen_model,
-                X_sentences,
+                sentences,
                 )
 
         return synthesis_sentences
@@ -180,8 +182,8 @@ class SynthesisAndPerformanceSummary(object):
     def parse_for_spinco(self, synth_sentences):
 
         spincoat_parse_results = [
-            spincoat.parse_spincoat(synth_sentences)
-            for synth_sentences in synthesis_sentences
+            spincoat.parse_spincoat(synth_sentence)
+            for synth_sentence in synth_sentences
             ]
 
         return spincoat_parse_results
@@ -190,8 +192,8 @@ class SynthesisAndPerformanceSummary(object):
     def parse_for_anneal(self, synth_sentences):
 
         anneal_parse_results = [
-            anneal.parse_anneal(synth_sentences)
-            for synth_sentences in synthesis_sentences
+            anneal.parse_anneal(synth_sentence)
+            for synth_sentence in synth_sentences
             ]
 
         return anneal_parse_results
