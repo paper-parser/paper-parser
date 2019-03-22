@@ -66,13 +66,20 @@ The simplest way to run the example notebooks is to clone the git repo to your l
     conda activate your_new_env
     ```
 
-3. pip install in your new conda environment by running 
+3. A necessary dependency (for Windows computers ?? before the next step)
+    ```bash
+    conda install -c conda-forge dawg 
+    ```
+4. pip install in your new conda environment by running 
     ```bash
     pip install .
     ```
     in the top level directory containing `setup.py`. This will automatically install the dependencies required to run the example notebooks. 
-
-<!-- 3. For use of the example notebooks, you will also need jupyter notebooks and pandas, you can install these by the commands
+5. Get ChemDataExtractor's Data files - a software package that PaperParser is built on, click [here](http://chemdataextractor.org/docs/install) for more installation information
+    ```bash
+    cde data download
+    ```
+6. For use of the example notebooks, you will also need jupyter notebooks and pandas, you can install these by the commands
     ```bash
     pip install ipykernel 
     pip install pandas
