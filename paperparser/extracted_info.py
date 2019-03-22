@@ -84,40 +84,93 @@ Development Notes:
     03/07/19: Changing implementation of 'ActiveMaterialGraph' to take advantage
 
 """
-from .parse import pce, spincoat, anneal
+from .parse import pce, synthesis
 
 
 class SynthesisAndPerformanceSummary(object):
     """ Performs data extraction from paper
         """
 
-    def __init__(self, paper):
+    def __init__(self, paper_html_path):
         """ Run components to extract information from paper """
 
         # convert paper to text...
 
+        self.paper_html_path = paper_html_path
 
-
-        self.relational_dict = {}
-        self.paper = paper
+        self.relational_dict = self.summarize(self.paper_html_path)
 
 
     def summarize(self):
 
-        self.flagged_paragraphs = neels_function(self.paper)
+        self.paper = read_paper(self.paper_html_path)
+        self.synth_sentences, self.sent_recor = self.find_synth_sentences(
+            self.paper
+            )
+        self.parsed_spinco = self.parse_for_spinco(self.synth_sentences)
+        self.parsed_anneal = self.parse_for_anneal(self.synth_sentences)
+        # self.step_order = self.order_steps(self.)
 
-        self.extract_synthesis_info(self.flagged_paragraphs)
-
-        # Parse paper for performance metrics
-
-        self.extract_performance_metrics(self.flagged_paragraphs)
+        self.pce_sentences = self.find_pce_sentences(self.paper)
+        self.parsed_pce = self.parse_for_pce(self.pce_sentences)
 
         # Somehow need to associate properties with chemical name...
-        chemical_name = magically_extact_chemical_name(
-            flagged_paragraphs
+        self.chem_names_associate = self.magically_extact_chemicals(
+            self.paper
             )
 
         self.relational_dict['Material'] = chemical_name
+
+
+    def read_paper(self, paper_html_path):
+
+        paper = extract_sentences.read_html_paper(
+            self.paper_html_path
+            )
+
+        return paper
+
+
+    def find_synth_sentences(self, paper):
+
+        (
+            X_sentences,
+            sentences_record
+            ) = extract_sentences.extract_all_sentences(
+                self.paper
+                    )
+        return X_sentences, sentences_record
+
+
+    def parse_for_spinco(self, synth_sentences):
+
+        spincoat_parse_results = [
+            spincoat.parse_spincoat(synth_sentences)
+            for synth_sentences in synthesis_sentences
+            ]
+
+        return spincoat_parse_results
+
+    def parse_for_anneal(self, synth_sentences):
+
+        anneal_parse_results = [
+            anneal.parse_anneal(synth_sentences)
+            for synth_sentences in synthesis_sentences
+            ]
+
+        return anneal_parse_results
+
+
+    def find_pce_sentences(self, paper):
+
+
+
+
+
+
+
+
+
 
 
     def extract_synthesis_info(self, flagged_paragraphs):
@@ -310,3 +363,4 @@ class PerformanceMetric(object):
 
 #         # unsure how to do this right now, but what I want is an easy way to build the
 #         # Unfinished outline ...
+
