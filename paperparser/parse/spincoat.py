@@ -82,7 +82,13 @@ spincoat = (Optional(spdprefix) + spds + Optional(delim) + Optional(spdunits) + 
 # New parser class for spin-coat parameter parsing
 class SpinCoatParser(BaseParser):
     """
-    Parser class for parsing spin-coating parameters.
+    Class built to parse spincoat parameters through CDE's BaseParser class.
+
+    HOW IT WORKS
+    Using "spincoat" regex as a root, parses through component regex
+    expressions that make up "annealing", e.g. units and values.
+    Appends all speeds and times, along with their values and units, into
+    structured nested lists of dictionaries.
     """
     root = spincoat
 

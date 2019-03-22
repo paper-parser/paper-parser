@@ -79,6 +79,15 @@ annealing = (tempprefix + temps + Optional(delim) + tempunits + Optional(delim) 
 
 # Define new parsing class for parsing annealing parameters
 class AnnealParser(BaseParser):
+    """
+    Class built to parse annealing parameters through CDE's BaseParser class.
+
+    HOW IT WORKS
+    Using "annealing" regex as a root, parses through component regex
+    expressions that make up "annealing", e.g. units and values.
+    Appends all times and temperatures, along with their values and units, into
+    structured nested lists of dictionaries.
+    """
     root = annealing
 
     def interpret(self, result, start, end):
