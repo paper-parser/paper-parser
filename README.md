@@ -18,7 +18,8 @@ _WARNING: package is currently in development and not ready for use._
 
 Each paper is converted into a relational graph like the example below,
 
-    Material (some chemical name)
+<p align="center"><img src="https://github.com/paper-parser/paper-parser/blob/master/doc/images/output_graph.png" width="750" alt="graph"></p>
+<!--     Material (some chemical name)
     |\
     | Performance metrics
     | |\
@@ -41,7 +42,7 @@ Each paper is converted into a relational graph like the example below,
     |\
     | etc. for other steps...
     |
-    step ordering: ['step 1', 'step 2', 'step 3']
+    step ordering: ['step 1', 'step 2', 'step 3'] -->
 
 implemented in python as nested dictionaries and lists.
 
@@ -51,19 +52,31 @@ Each paper goes through the following process
 
 # Installation
 
-Clone the repo to your local machine and then install `paperparser` by
+The simplest way to run the example notebooks is to clone the git repo to your local machine.  To install `paperparser` and it dependencies, we recommend
 
-1. First creating a copy on the conda environment `environment.yml` by running the following command in your terminal 
+1. First creating a new conda environment by running the following command in your terminal 
     ```bash
-    conda env create -f environment.yml
+    conda create -n your_new_env python=3.6
+    ```
+    Since paperparser was designed in python 3.6. 
+    <!-- This turns out to be important, because for some reason the verson of pip that comes with the conda installation of python 3.6 does not work with our `setup.py` and `requirements.txt` files. -->
+
+2. Activate your new, clean conda environment
+    ```bash
+    conda activate your_new_env
     ```
 
-
-2. Install the package by running 
+3. pip install in your new conda environment by running 
     ```bash
     pip install .
     ```
-    in the top level directory containing `setup.py`.
+    in the top level directory containing `setup.py`. This will automatically install the dependencies required to run the example notebooks. 
+
+<!-- 3. For use of the example notebooks, you will also need jupyter notebooks and pandas, you can install these by the commands
+    ```bash
+    pip install ipykernel 
+    pip install pandas
+    ``` -->
 
 (from setup.py example [here](https://python-packaging.readthedocs.io/en/latest/minimal.html))
 

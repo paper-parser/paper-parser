@@ -12,7 +12,7 @@ else:
 
 setup(
     name='PaperParser',
-    version='1.0',
+    version='0.1',
     author='Christine Chang, Harrison Goldwyn, Neel Shah, Linnette Teo',
     author_email='changch@uw.edu, goldwyn@uw.edu, neel931@uw.edu, teoqrl@uw.edu',
     license='MIT',
@@ -22,7 +22,7 @@ setup(
     long_description=long_description,
     keywords='text-mining mining chemistry nlp perovskite synthesis',
     install_requires=[
-        'chemdataextractor', 'spacy', 'scikit-learn'
+        'chemdataextractor', 'spacy', 'scikit-learn==0.20.2', 'pandas', 'ipykernel'
     ],
     classifiers=[
         'Intended Audience :: Developers',
