@@ -2,6 +2,36 @@
 """
 PaperParser
 ~~~~~~~~~~~
+package structure:
+
+    paperparser:
+    |
+    |\
+    | parse:
+    | |\
+    | | anneal
+    | |\
+    | | order
+    | |\
+    | | pce
+    |  \
+    |   spincoat
+    |
+    |\
+    | read_paper
+    | |\
+    | | extract_sentences
+    | |\
+    | | search_paper_for_perform_sentences
+    |  \
+    |   sentence_classifier
+    |
+    |\
+    | extracted_info
+    |
+    test
+
+
 """
 
 from __future__ import absolute_import
