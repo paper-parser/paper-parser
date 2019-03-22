@@ -6,7 +6,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib
 import numpy
 
-syn_sen_model = joblib.load('../../examples/syn_sen_model.pkl') #imported pre-trained model for classfying sentence
+syn_sen_model = joblib.load('../syn_sen_model.pkl') #imported pre-trained model for classfying sentence
 
 def test_spacy_tokenizer():
     """ Test function for tokenizing a sentence"""
