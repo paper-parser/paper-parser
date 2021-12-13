@@ -13,7 +13,7 @@ cytoolz==0.9.0.1
 DAWG==0.7.8
 dill==0.2.9
 idna==2.8
-lxml==4.3.2
+lxml==4.6.5
 #mkl-fft==1.0.10
 #mkl-random==1.0.2
 msgpack==0.6.1
